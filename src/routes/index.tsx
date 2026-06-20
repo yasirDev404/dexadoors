@@ -169,7 +169,7 @@ function Home() {
         <section id="services" className="border-b border-border">
           <div className="mx-auto max-w-6xl px-6 py-28">
             <div className="max-w-2xl">
-              <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">One partner. Every digital need.</h2>
+              <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Tired of managing agencies that don't talk to each other?</h2>
               <p className="mt-5 text-lg text-muted-foreground">
                 Most businesses juggle 5 different agencies. We handle it all under one roof.
               </p>
