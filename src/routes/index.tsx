@@ -1,6 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import { HeroFloatingLines } from "../components/backgrounds/hero-floating-lines";
 import {
   ArrowRight,
   Layers,
@@ -107,7 +105,7 @@ function Home() {
       >
         <div className="flex flex-1 items-center">
           <a href="#top">
-            <img src="/dexa-doors-logo.png" alt="Dexa Doors" className="h-7 w-auto" />
+            <img src="/dexa-doors-logo.png" alt="Dexa Doors" className="h-40 w-auto md:h-60" />
           </a>
         </div>
         <div className="hidden items-center gap-7 md:flex">
@@ -133,7 +131,7 @@ function Home() {
         <div className="flex flex-1 items-center justify-end">
           <a
             href="#contact"
-            className="rounded-[6px] border border-[rgba(37,99,235,0.55)] bg-transparent px-4 py-1.5 text-[13px] text-[#93b4f0] transition-all duration-200 hover:border-[#2563EB] hover:bg-[rgba(37,99,235,0.12)] hover:text-white"
+            className="rounded-[6px] border border-[rgba(59,130,246,0.65)] bg-[rgba(37,99,235,0.18)] px-4 py-1.5 text-[13px] font-medium text-[#c7d9fc] shadow-[0_0_14px_rgba(37,99,235,0.35)] transition-all duration-300 hover:border-[#60a5fa] hover:bg-[rgba(37,99,235,0.28)] hover:text-white hover:shadow-[0_0_22px_rgba(59,130,246,0.75),0_0_44px_rgba(37,99,235,0.45),inset_0_0_16px_rgba(96,165,250,0.2)]"
           >
             Let&apos;s Talk
           </a>
@@ -143,9 +141,9 @@ function Home() {
       <main id="top">
         {/* HERO */}
         <section className="flex min-h-screen items-center pt-[52px]">
-          <div className="mx-auto flex w-full max-w-5xl flex-col px-6 py-[140px] md:flex-row md:items-center md:gap-12">
-            <div className="w-full text-left md:w-[55%]">
-              <h1 className="max-w-xl font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
+          <div className="mx-auto w-full max-w-5xl px-6 py-[140px]">
+            <div className="w-full max-w-xl text-left">
+              <h1 className="font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
                 Your business deserves more than just a website.
               </h1>
               <p className="mt-8 max-w-[520px] text-[18px] leading-[1.7] text-[#6B6B6B]">
@@ -168,16 +166,6 @@ function Home() {
               <p className="mt-10 text-[13px] text-[#6B6B6B]">
                 Trusted by businesses in the UK, Netherlands & beyond.
               </p>
-            </div>
-            <div className="relative mt-12 h-[480px] w-full overflow-hidden md:mt-0 md:w-[45%]">
-              <HeroFloatingLines />
-              <div
-                className="pointer-events-none absolute inset-0 z-10"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at center, transparent 35%, #080808 100%)",
-                }}
-              />
             </div>
           </div>
         </section>
