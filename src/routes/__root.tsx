@@ -10,6 +10,7 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { LightPillarBackground } from "../components/backgrounds/light-pillar-background";
 
 function NotFoundComponent() {
   return (
@@ -99,6 +100,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <LightPillarBackground />
         {children}
         <Scripts />
       </body>

@@ -20,6 +20,9 @@ import {
   CalendarDays,
 } from "lucide-react";
 
+import LogoLoop from "../components/animations/logo-loop";
+import { SiteNav } from "../components/site-nav";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -90,50 +93,23 @@ const differences = [
   { icon: Sparkles, title: "Full stack, full picture", desc: "Design, development, marketing, AI — one team, one vision, zero gaps." },
 ];
 
+const techLogos = [
+  { src: "/logos/react.svg", alt: "React", title: "React" },
+  { src: "/logos/typescript.svg", alt: "TypeScript", title: "TypeScript" },
+  { src: "/logos/vite.svg", alt: "Vite", title: "Vite" },
+  { src: "/logos/tailwind.svg", alt: "Tailwind CSS", title: "Tailwind CSS" },
+  { src: "/logos/node.svg", alt: "Node.js", title: "Node.js" },
+];
+
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased">
-      {/* NAV */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background">
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <a href="#top" className="text-sm font-semibold tracking-[0.18em] text-foreground">
-            DEXA DOORS
-          </a>
-          <div className="hidden items-center gap-8 md:flex">
-            <a href="#services" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Services</a>
-            <a href="#work" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Work</a>
-            <a href="#contact" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Contact</a>
-          </div>
-          <a
-            href="#contact"
-            className="inline-flex h-9 items-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Let's Talk
-          </a>
-        </nav>
-      </header>
+    <div className="min-h-screen text-foreground antialiased">
+      <SiteNav />
 
       <main id="top">
         {/* HERO */}
-        <section className="relative overflow-hidden border-b border-border">
-          {/* Dot grid pattern */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.25]"
-            style={{
-              backgroundImage: "radial-gradient(rgba(148,163,184,0.18) 1px, transparent 1px)",
-              backgroundSize: "24px 24px",
-              maskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-              WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-            }}
-          />
-          {/* Blue radial glow behind headline */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-40 h-[520px] w-[900px] -translate-x-1/2 rounded-full blur-[160px]"
-            style={{ background: "radial-gradient(closest-side, rgba(37,99,235,0.15), transparent)" }}
-          />
-          <div className="relative mx-auto max-w-6xl px-6 pb-32 pt-28 md:pt-36">
+        <section className="relative overflow-hidden border-b border-border/60">
+          <div className="relative mx-auto max-w-6xl px-6 pb-32 pt-32 md:pt-40">
             <h1 className="max-w-5xl text-6xl font-semibold leading-[1.02] tracking-tight md:text-8xl">
               Your business{" "}
               <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#2563EB] bg-clip-text text-transparent">
@@ -162,6 +138,26 @@ function Home() {
             <p className="mt-8 text-xs tracking-wide text-muted-foreground">
               Trusted by businesses in the UK, Netherlands & beyond.
             </p>
+          </div>
+        </section>
+
+        {/* TECH STACK */}
+        <section className="border-b border-border/60 py-12">
+          <div className="mx-auto max-w-6xl px-6">
+            <p className="mb-8 text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              Built with modern tools
+            </p>
+            <LogoLoop
+              logos={techLogos}
+              speed={60}
+              logoHeight={36}
+              gap={56}
+              fadeOut
+              fadeOutColor="#0A0A0F"
+              pauseOnHover
+              scaleOnHover
+              ariaLabel="Technologies we use"
+            />
           </div>
         </section>
 
