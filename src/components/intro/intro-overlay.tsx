@@ -2,7 +2,6 @@ import { TAGLINE, useIntroSequence } from "./use-intro-sequence";
 
 export function IntroOverlay() {
   const {
-    mounted,
     skipIntro,
     geo,
     showText,
@@ -14,10 +13,13 @@ export function IntroOverlay() {
     curtainRef,
   } = useIntroSequence();
 
-  if (!mounted || skipIntro || done) return null;
+  if (skipIntro || done) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[200]" aria-hidden="true">
+    <div
+      className="intro-overlay-root pointer-events-none fixed inset-0 z-[200]"
+      aria-hidden="true"
+    >
       <div
         ref={curtainRef}
         className="absolute inset-0 bg-[#050505]"

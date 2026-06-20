@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { animate } from "framer-motion";
 
+import { clearIntroBootPending, INTRO_PLAYED_KEY, shouldSkipIntroSync } from "./intro-boot";
 import { logIntroElement, logIntroPhase } from "./intro-debug";
 import {
   type DockGeometry,
@@ -12,7 +13,6 @@ import {
   waitFrames,
 } from "./intro-geometry";
 
-export const INTRO_PLAYED_KEY = "dexadoors-intro-played";
 export const TAGLINE = "Our business is to make your business grow";
 
 const BOOT_DELAY_MS = 2000;
@@ -37,18 +37,6 @@ export type IntroPhaseState =
   | "hold"
   | "curtain"
   | "done";
-
-function shouldSkipIntro(): boolean {
-  if (typeof window === "undefined") return true;
-  if (window.location.pathname !== "/") return true;
-  if (import.meta.env.DEV && new URLSearchParams(window.location.search).has("replayIntro")) {
-    sessionStorage.removeItem(INTRO_PLAYED_KEY);
-    return false;
-  }
-  if (sessionStorage.getItem(INTRO_PLAYED_KEY) === "1") return true;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
-  return false;
-}
 
 function lockScroll() {
   document.body.style.overflow = "hidden";
@@ -88,30 +76,31 @@ async function waitForRef<T extends HTMLElement>(
   return null;
 }
 
+function getInitialIntroState() {
+  if (typeof window === "undefined") return { skipIntro: true, done: true };
+  const skip = shouldSkipIntroSync();
+  return { skipIntro: skip, done: skip };
+}
+
 export function useIntroSequence() {
-  const [mounted, setMounted] = useState(false);
-  const [skipIntro, setSkipIntro] = useState(true);
+  const initial = getInitialIntroState();
+  const [skipIntro, setSkipIntro] = useState(initial.skipIntro);
   const [geo, setGeo] = useState<DockGeometry | null>(null);
   const [phase, setPhase] = useState<IntroPhaseState>("idle");
   const [showText, setShowText] = useState(false);
   const [revealing, setRevealing] = useState(false);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(initial.done);
 
   const dRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const curtainRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-
-    const skip = shouldSkipIntro();
+  useLayoutEffect(() => {
+    const skip = shouldSkipIntroSync();
     setSkipIntro(skip);
     if (skip) {
+      clearIntroBootPending();
       logIntroPhase("skip");
       setDone(true);
       return;
@@ -122,6 +111,7 @@ export function useIntroSequence() {
 
     const finish = () => {
       unlockScroll();
+      clearIntroBootPending();
       sessionStorage.setItem(INTRO_PLAYED_KEY, "1");
       setPhase("done");
       logIntroPhase("done");
@@ -259,10 +249,9 @@ export function useIntroSequence() {
       clearTimeout(safety);
       unlockScroll();
     };
-  }, [mounted]);
+  }, []);
 
   return {
-    mounted,
     skipIntro,
     geo,
     phase,

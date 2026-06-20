@@ -12,6 +12,10 @@ import { type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { SiteBackground } from "../components/backgrounds/site-background";
 import { IntroOverlay } from "../components/intro/intro-overlay";
+import {
+  INTRO_BOOT_CRITICAL_CSS,
+  INTRO_BOOT_SCRIPT,
+} from "../components/intro/intro-boot";
 
 function NotFoundComponent() {
   return (
@@ -101,10 +105,14 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <style dangerouslySetInnerHTML={{ __html: INTRO_BOOT_CRITICAL_CSS }} />
+        <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT_SCRIPT }} />
       </head>
       <body>
-        <SiteBackground />
-        {children}
+        <div id="site-shell">
+          <SiteBackground />
+          {children}
+        </div>
         <IntroOverlay />
         <Scripts />
       </body>
