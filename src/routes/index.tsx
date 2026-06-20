@@ -95,7 +95,7 @@ function Home() {
     <div className="relative z-[1] min-h-screen text-[#F2F2F2] antialiased">
       {/* NAV */}
       <nav
-        className="fixed inset-x-0 top-0 z-50 flex h-[52px] max-h-[52px] items-center px-8"
+        className="fixed inset-x-0 top-0 z-50 flex h-[52px] max-h-[52px] items-stretch overflow-visible px-8"
         style={{
           background: "rgba(8, 8, 8, 0.6)",
           backdropFilter: "blur(12px) saturate(150%)",
@@ -103,12 +103,16 @@ function Home() {
           borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
         }}
       >
-        <div className="flex flex-1 items-center">
-          <a href="#top">
-            <img src="/dexa-doors-logo.png" alt="Dexa Doors" className="h-40 w-auto md:h-60" />
+        <div className="relative flex h-full flex-1 items-center overflow-visible">
+          <a href="#top" className="block">
+            <img
+              src="/newlogo.png"
+              alt="Dexa Doors"
+              className="h-14 w-auto object-contain md:h-[80px]"
+            />
           </a>
         </div>
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden h-full items-center gap-7 md:flex">
           <a
             href="#services"
             className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
@@ -128,10 +132,10 @@ function Home() {
             Contact
           </a>
         </div>
-        <div className="flex flex-1 items-center justify-end">
+        <div className="flex h-full flex-1 items-center justify-end">
           <a
             href="#contact"
-            className="rounded-[6px] border border-[rgba(59,130,246,0.65)] bg-[rgba(37,99,235,0.18)] px-4 py-1.5 text-[13px] font-medium text-[#c7d9fc] shadow-[0_0_14px_rgba(37,99,235,0.35)] transition-all duration-300 hover:border-[#60a5fa] hover:bg-[rgba(37,99,235,0.28)] hover:text-white hover:shadow-[0_0_22px_rgba(59,130,246,0.75),0_0_44px_rgba(37,99,235,0.45),inset_0_0_16px_rgba(96,165,250,0.2)]"
+            className="rounded-[6px] border border-[rgba(255,255,255,0.35)] bg-[rgba(255,255,255,0.06)] px-4 py-1.5 text-[13px] font-medium text-[#f2f2f2] shadow-[0_0_12px_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-white hover:bg-[rgba(255,255,255,0.12)] hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.35),0_0_40px_rgba(255,255,255,0.15),inset_0_0_12px_rgba(255,255,255,0.08)]"
           >
             Let&apos;s Talk
           </a>

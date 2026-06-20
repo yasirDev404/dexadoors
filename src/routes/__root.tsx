@@ -10,7 +10,7 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { DotFieldBackground } from "../components/backgrounds/dot-field-background";
+import { SiteBackground } from "../components/backgrounds/site-background";
 
 function NotFoundComponent() {
   return (
@@ -100,7 +100,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <DotFieldBackground />
+        <SiteBackground />
         {children}
         <Scripts />
       </body>
