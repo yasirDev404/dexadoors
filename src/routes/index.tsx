@@ -396,12 +396,16 @@ function Home() {
                   <div className="mt-1 text-sm text-muted-foreground">9:00 AM – 9:00 PM PKT</div>
 
                   <a
-                    href="mailto:dexadoors@gmail.com?subject=Schedule a call"
+                    href="https://calendly.com/dexadoors/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                   >
                     Schedule A Call Now <CalendarDays className="h-4 w-4" />
                   </a>
-                  <p className="mt-3 text-xs text-muted-foreground">We'll reply within 24 hours to confirm a time.</p>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    You'll be redirected to Calendly to pick a convenient time
+                  </p>
                 </div>
               </div>
             </div>
