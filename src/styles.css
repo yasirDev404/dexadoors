@@ -28,51 +28,50 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "Inter", system-ui, sans-serif;
-  --animate-star-movement-bottom: star-movement-bottom linear infinite alternate;
-  --animate-star-movement-top: star-movement-top linear infinite alternate;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: #0A0A0F;
-  --foreground: #FFFFFF;
-  --card: #111118;
-  --card-foreground: #FFFFFF;
-  --popover: #111118;
-  --popover-foreground: #FFFFFF;
+  --radius: 0.75rem;
+  --background: #080808;
+  --foreground: #F2F2F2;
+  --card: #111111;
+  --card-foreground: #F2F2F2;
+  --popover: #111111;
+  --popover-foreground: #F2F2F2;
   --primary: #2563EB;
   --primary-foreground: #FFFFFF;
-  --secondary: #111118;
-  --secondary-foreground: #FFFFFF;
-  --muted: #111118;
-  --muted-foreground: #94A3B8;
+  --secondary: #111111;
+  --secondary-foreground: #F2F2F2;
+  --muted: #111111;
+  --muted-foreground: #6B6B6B;
   --accent: #2563EB;
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #FFFFFF;
-  --border: #1E1E2E;
-  --input: #1E1E2E;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
   --ring: #2563EB;
 }
 
 .dark {
-  --background: #0A0A0F;
-  --foreground: #FFFFFF;
-  --card: #111118;
-  --card-foreground: #FFFFFF;
-  --popover: #111118;
-  --popover-foreground: #FFFFFF;
+  --background: #080808;
+  --foreground: #F2F2F2;
+  --card: #111111;
+  --card-foreground: #F2F2F2;
+  --popover: #111111;
+  --popover-foreground: #F2F2F2;
   --primary: #2563EB;
   --primary-foreground: #FFFFFF;
-  --secondary: #111118;
-  --secondary-foreground: #FFFFFF;
-  --muted: #111118;
-  --muted-foreground: #94A3B8;
+  --secondary: #111111;
+  --secondary-foreground: #F2F2F2;
+  --muted: #111111;
+  --muted-foreground: #6B6B6B;
   --accent: #2563EB;
   --accent-foreground: #FFFFFF;
-  --border: #1E1E2E;
-  --input: #1E1E2E;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
   --ring: #2563EB;
 }
 
@@ -86,33 +85,10 @@
   }
 
   body {
-    background-color: transparent;
+    background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-  }
-}
-
-@keyframes star-movement-bottom {
-  0% {
-    transform: translate(0%, 0%);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-100%, 0%);
-    opacity: 0;
-  }
-}
-
-@keyframes star-movement-top {
-  0% {
-    transform: translate(0%, 0%);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(100%, 0%);
-    opacity: 0;
   }
 }

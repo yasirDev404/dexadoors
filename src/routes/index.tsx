@@ -20,9 +20,6 @@ import {
   CalendarDays,
 } from "lucide-react";
 
-import LogoLoop from "../components/animations/logo-loop";
-import { SiteNav } from "../components/site-nav";
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -93,95 +90,91 @@ const differences = [
   { icon: Sparkles, title: "Full stack, full picture", desc: "Design, development, marketing, AI — one team, one vision, zero gaps." },
 ];
 
-const techLogos = [
-  { src: "/logos/react.svg", alt: "React", title: "React" },
-  { src: "/logos/typescript.svg", alt: "TypeScript", title: "TypeScript" },
-  { src: "/logos/vite.svg", alt: "Vite", title: "Vite" },
-  { src: "/logos/tailwind.svg", alt: "Tailwind CSS", title: "Tailwind CSS" },
-  { src: "/logos/node.svg", alt: "Node.js", title: "Node.js" },
-];
-
 function Home() {
   return (
-    <div className="min-h-screen text-foreground antialiased">
-      <SiteNav />
+    <div className="min-h-screen bg-[#080808] text-[#F2F2F2] antialiased">
+      {/* NAV */}
+      <nav className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+        <div
+          className="flex h-[52px] w-full max-w-[680px] items-center justify-between rounded-full px-5"
+          style={{
+            background: "rgba(12, 12, 12, 0.85)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+          }}
+        >
+          <a
+            href="#top"
+            className="text-[13px] tracking-[0.1em] text-white"
+          >
+            DEXA DOORS
+          </a>
+          <div className="hidden items-center gap-6 md:flex">
+            <a href="#services" className="text-[13px] text-[#A0A0A0] transition-colors hover:text-white">Services</a>
+            <a href="#work" className="text-[13px] text-[#A0A0A0] transition-colors hover:text-white">Work</a>
+            <a href="#contact" className="text-[13px] text-[#A0A0A0] transition-colors hover:text-white">Contact</a>
+          </div>
+          <a
+            href="#contact"
+            className="rounded-full bg-[#2563EB] px-4 py-2 text-[13px] text-white transition-opacity hover:opacity-90"
+          >
+            Let's Talk
+          </a>
+        </div>
+      </nav>
 
       <main id="top">
         {/* HERO */}
-        <section className="relative overflow-hidden border-b border-border/60">
-          <div className="relative mx-auto max-w-6xl px-6 pb-32 pt-32 md:pt-40">
-            <h1 className="max-w-5xl text-6xl font-semibold leading-[1.02] tracking-tight md:text-8xl">
-              Your business{" "}
-              <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#2563EB] bg-clip-text text-transparent">
-                deserves
-              </span>
-              <br />
-              <span className="text-foreground">more than just a website.</span>
+        <section className="flex min-h-screen items-center">
+          <div className="mx-auto w-full max-w-5xl px-6 py-[140px]">
+            <h1 className="max-w-4xl font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
+              Your business deserves more than just a website.
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            <p className="mt-8 max-w-[520px] text-[18px] leading-[1.7] text-[#6B6B6B]">
               From custom platforms to AI-powered systems — we take over your entire digital presence so you stop worrying about technology and start seeing results.
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
+            <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
                 href="#contact"
-                className="inline-flex h-11 items-center gap-2 rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                className="inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-6 py-2.5 text-[14px] text-white transition-opacity hover:opacity-90"
               >
                 Start a Project <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="#work"
-                className="inline-flex h-11 items-center rounded-md border border-border bg-transparent px-6 text-sm font-medium text-foreground transition-colors hover:bg-card"
+                className="inline-flex items-center rounded-full border border-[rgba(255,255,255,0.08)] px-6 py-2.5 text-[14px] text-[#F2F2F2] transition-colors hover:border-[rgba(255,255,255,0.16)]"
               >
                 See Our Work
               </a>
             </div>
-            <p className="mt-8 text-xs tracking-wide text-muted-foreground">
+            <p className="mt-10 text-[13px] text-[#6B6B6B]">
               Trusted by businesses in the UK, Netherlands & beyond.
             </p>
           </div>
         </section>
 
-        {/* TECH STACK */}
-        <section className="border-b border-border/60 py-12">
-          <div className="mx-auto max-w-6xl px-6">
-            <p className="mb-8 text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-              Built with modern tools
-            </p>
-            <LogoLoop
-              logos={techLogos}
-              speed={60}
-              logoHeight={36}
-              gap={56}
-              fadeOut
-              fadeOutColor="#0A0A0F"
-              pauseOnHover
-              scaleOnHover
-              ariaLabel="Technologies we use"
-            />
-          </div>
-        </section>
-
         {/* SERVICES */}
-        <section id="services" className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-6 py-28">
+        <section id="services">
+          <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-2xl">
-              <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Tired of managing agencies that don't talk to each other?</h2>
-              <p className="mt-5 text-lg text-muted-foreground">
+              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+                Tired of managing agencies that don't talk to each other?
+              </h2>
+              <p className="mt-6 max-w-[480px] text-[16px] leading-[1.7] text-[#6B6B6B]">
                 Most businesses juggle 5 different agencies. We handle it all under one roof.
               </p>
             </div>
 
-            <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {services.map(({ icon: Icon, name, desc }) => (
                 <div
                   key={name}
-                  className="group relative flex flex-col gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#2a2a3e] hover:shadow-[inset_3px_0_0_0_#2563EB]"
+                  className="flex flex-col gap-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8 transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-primary">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">{name}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{desc}</p>
+                  <Icon className="h-5 w-5 text-[#6B6B6B]" />
+                  <h3 className="text-[16px] font-medium text-[#F2F2F2]">{name}</h3>
+                  <p className="text-[14px] leading-relaxed text-[#6B6B6B]">{desc}</p>
                 </div>
               ))}
             </div>
@@ -189,13 +182,13 @@ function Home() {
         </section>
 
         {/* STATS */}
-        <section className="border-y border-border bg-[#0D0D14]">
-          <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="grid grid-cols-2 gap-y-12 md:grid-cols-4">
+        <section>
+          <div className="mx-auto max-w-5xl px-6 py-[140px]">
+            <div className="grid grid-cols-2 gap-y-16 md:grid-cols-4">
               {stats.map((s) => (
                 <div key={s.label}>
-                  <div className="text-6xl font-bold tracking-tight text-foreground md:text-7xl">{s.num}</div>
-                  <div className="mt-4 text-sm text-muted-foreground">{s.label}</div>
+                  <div className="font-serif text-[48px] font-bold text-white md:text-[64px]">{s.num}</div>
+                  <div className="mt-4 text-[13px] uppercase tracking-[0.05em] text-[#6B6B6B]">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -203,33 +196,32 @@ function Home() {
         </section>
 
         {/* WORK */}
-        <section id="work" className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-6 py-28">
+        <section id="work">
+          <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-2xl">
-              <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Real projects. Real businesses.</h2>
+              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+                Real projects. Real businesses.
+              </h2>
             </div>
-            <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
               {projects.map((p) => (
                 <div
                   key={p.name}
-                  className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-200 hover:-translate-y-1 hover:border-[#2a2a3e]"
+                  className="group flex flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
-                  <div
-                    className="flex items-end px-8 py-6"
-                    style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #111118 100%)" }}
-                  >
-                    <span className="rounded-md border border-border bg-background/60 px-2.5 py-1 text-xs uppercase tracking-wider text-muted-foreground backdrop-blur">
+                  <div className="px-8 pt-8">
+                    <span className="text-[12px] uppercase tracking-[0.08em] text-[#6B6B6B]">
                       {p.tag}
                     </span>
                   </div>
-                  <div className="flex flex-1 flex-col p-8">
-                    <h3 className="text-2xl font-semibold text-foreground">{p.name}</h3>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <div className="flex flex-1 flex-col px-8 pb-8 pt-4">
+                    <h3 className="text-[20px] font-medium text-[#F2F2F2]">{p.name}</h3>
+                    <p className="mt-3 flex-1 text-[14px] leading-[1.7] text-[#6B6B6B]">{p.desc}</p>
                     <a
                       href={p.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-6 inline-flex w-fit items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                      className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-[rgba(255,255,255,0.08)] px-5 py-2 text-[13px] text-[#F2F2F2] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.2)]"
                     >
                       Visit Live Site <ExternalLink className="h-3.5 w-3.5" />
                     </a>
@@ -241,24 +233,22 @@ function Home() {
         </section>
 
         {/* DIFFERENCE */}
-        <section className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-6 py-28">
+        <section>
+          <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-3xl">
-              <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
+              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 You're not hiring a vendor. You're gaining a partner.
               </h2>
             </div>
-            <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-3">
+            <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
               {differences.map(({ icon: Icon, title, desc }) => (
                 <div
                   key={title}
-                  className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#2a2a3e]"
+                  className="flex flex-col gap-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8 transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background text-primary">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">{title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{desc}</p>
+                  <Icon className="h-5 w-5 text-[#6B6B6B]" />
+                  <h3 className="text-[16px] font-medium text-[#F2F2F2]">{title}</h3>
+                  <p className="text-[14px] leading-[1.7] text-[#6B6B6B]">{desc}</p>
                 </div>
               ))}
             </div>
@@ -266,38 +256,38 @@ function Home() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-6 py-28">
+        <section id="contact">
+          <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-4xl font-semibold tracking-tight md:text-6xl">Get In Touch</h2>
-              <p className="mx-auto mt-5 text-lg text-muted-foreground">
+              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+                Get In Touch
+              </h2>
+              <p className="mx-auto mt-6 max-w-[480px] text-[16px] leading-[1.7] text-[#6B6B6B]">
                 Have a project in mind? Let's build something amazing together.
               </p>
             </div>
 
-            <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-2">
-              {/* Left: Let's Talk */}
+            <div className="mt-20 grid grid-cols-1 gap-12 lg:grid-cols-2">
               <div>
-                <h3 className="text-2xl font-semibold text-foreground">Let's Talk</h3>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+                <h3 className="text-[20px] font-medium text-[#F2F2F2]">Let's Talk</h3>
+                <p className="mt-5 max-w-md text-[14px] leading-[1.7] text-[#6B6B6B]">
                   Whether you need a custom platform, a full digital overhaul, or AI baked into your business — we're here to help.
                 </p>
 
                 <a
                   href="mailto:dexadoors@gmail.com"
-                  className="mt-8 flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#2a2a3e]"
+                  className="mt-10 flex items-center gap-4 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-6 transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-background text-primary">
-                    <Mail className="h-5 w-5" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#080808]">
+                    <Mail className="h-4 w-4 text-[#6B6B6B]" />
                   </div>
                   <div>
-                    <div className="text-xs text-muted-foreground">Email</div>
-                    <div className="text-sm font-medium text-foreground">dexadoors@gmail.com</div>
+                    <div className="text-[12px] text-[#6B6B6B]">Email</div>
+                    <div className="text-[14px] text-[#F2F2F2]">dexadoors@gmail.com</div>
                   </div>
                 </a>
               </div>
 
-              {/* Right: form */}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -308,40 +298,40 @@ function Home() {
                   const body = `From: ${name} <${email}>%0D%0A%0D%0A${encodeURIComponent(message)}`;
                   window.location.href = `mailto:dexadoors@gmail.com?subject=${encodeURIComponent("New project enquiry from " + name)}&body=${body}`;
                 }}
-                className="rounded-xl border border-border bg-card p-6 md:p-8"
+                className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8"
               >
-                <label className="block text-sm font-medium text-foreground">Your Name</label>
+                <label className="block text-[13px] text-[#6B6B6B]">Your Name</label>
                 <input
                   name="name"
                   required
                   maxLength={100}
                   placeholder="John Doe"
-                  className="mt-2 h-11 w-full rounded-md border border-border bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+                  className="mt-2 h-11 w-full rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#080808] px-4 text-[14px] text-[#F2F2F2] placeholder:text-[#6B6B6B] focus:border-[#2563EB] focus:outline-none"
                 />
 
-                <label className="mt-5 block text-sm font-medium text-foreground">Your Email</label>
+                <label className="mt-6 block text-[13px] text-[#6B6B6B]">Your Email</label>
                 <input
                   name="email"
                   type="email"
                   required
                   maxLength={255}
                   placeholder="john@example.com"
-                  className="mt-2 h-11 w-full rounded-md border border-border bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+                  className="mt-2 h-11 w-full rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#080808] px-4 text-[14px] text-[#F2F2F2] placeholder:text-[#6B6B6B] focus:border-[#2563EB] focus:outline-none"
                 />
 
-                <label className="mt-5 block text-sm font-medium text-foreground">Your Message</label>
+                <label className="mt-6 block text-[13px] text-[#6B6B6B]">Your Message</label>
                 <textarea
                   name="message"
                   required
                   maxLength={2000}
                   rows={5}
                   placeholder="Tell us about your project..."
-                  className="mt-2 w-full rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#080808] px-4 py-3 text-[14px] text-[#F2F2F2] placeholder:text-[#6B6B6B] focus:border-[#2563EB] focus:outline-none"
                 />
 
                 <button
                   type="submit"
-                  className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                  className="mt-8 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#2563EB] text-[14px] text-white transition-opacity hover:opacity-90"
                 >
                   Send Message <Send className="h-4 w-4" />
                 </button>
@@ -351,55 +341,57 @@ function Home() {
         </section>
 
         {/* BOOK A CALL */}
-        <section id="book" className="border-b border-border bg-[#0D0D14]">
-          <div className="mx-auto max-w-6xl px-6 py-28">
+        <section id="book">
+          <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Or Book A Call With Us</h2>
-              <p className="mx-auto mt-5 text-lg text-muted-foreground">
+              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+                Or Book A Call With Us
+              </h2>
+              <p className="mx-auto mt-6 max-w-[480px] text-[16px] leading-[1.7] text-[#6B6B6B]">
                 Prefer to talk? Schedule a 30-minute call to discuss your project in detail.
               </p>
             </div>
 
-            <div className="mt-14 rounded-xl border border-border bg-card p-8 md:p-10">
-              <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+            <div className="mt-20 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8 md:p-10">
+              <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">What We'll Cover:</h3>
-                  <ul className="mt-6 space-y-4">
+                  <h3 className="text-[16px] font-medium text-[#F2F2F2]">What We'll Cover:</h3>
+                  <ul className="mt-8 space-y-5">
                     {[
                       { icon: Video, label: "Your project requirements & goals" },
                       { icon: Clock, label: "Timeline and delivery estimates" },
                       { icon: Wrench, label: "Technical approach & stack" },
                       { icon: Calendar, label: "Pricing & next steps" },
                     ].map(({ icon: Icon, label }) => (
-                      <li key={label} className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-primary">
-                          <Icon className="h-4 w-4" />
+                      <li key={label} className="flex items-center gap-4">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#080808]">
+                          <Icon className="h-4 w-4 text-[#6B6B6B]" />
                         </div>
-                        <span className="text-sm text-foreground">{label}</span>
+                        <span className="text-[14px] text-[#F2F2F2]">{label}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="mt-8 flex items-center gap-2 text-xs text-muted-foreground">
-                    <Clock className="h-3.5 w-3.5 text-primary" />
+                  <div className="mt-10 flex items-center gap-2 text-[13px] text-[#6B6B6B]">
+                    <Clock className="h-3.5 w-3.5" />
                     30 minutes · Free consultation
                   </div>
                 </div>
 
                 <div className="flex flex-col md:items-start">
-                  <div className="text-sm font-medium text-foreground">Available for calls:</div>
-                  <div className="mt-3 text-xl font-semibold text-foreground">Monday – Saturday</div>
-                  <div className="mt-1 text-sm text-muted-foreground">9:00 AM – 9:00 PM PKT</div>
+                  <div className="text-[13px] text-[#6B6B6B]">Available for calls:</div>
+                  <div className="mt-3 font-serif text-[24px] font-bold text-[#F2F2F2]">Monday – Saturday</div>
+                  <div className="mt-2 text-[14px] text-[#6B6B6B]">9:00 AM – 9:00 PM PKT</div>
 
                   <a
                     href="https://calendly.com/dexadoors/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                    className="mt-10 inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-8 py-3 text-[14px] text-white transition-opacity hover:opacity-90"
                   >
                     Schedule A Call Now <CalendarDays className="h-4 w-4" />
                   </a>
-                  <p className="mt-3 text-xs text-muted-foreground">
+                  <p className="mt-3 text-[13px] text-[#6B6B6B]">
                     You'll be redirected to Calendly to pick a convenient time
                   </p>
                 </div>
@@ -410,19 +402,19 @@ function Home() {
 
         {/* FOOTER */}
         <footer>
-          <div className="mx-auto max-w-6xl px-6 py-14">
+          <div className="mx-auto max-w-5xl px-6 py-[80px]">
             <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
               <div>
-                <div className="text-sm font-semibold tracking-[0.18em] text-foreground">DEXA DOORS</div>
-                <div className="mt-2 text-sm text-muted-foreground">We build what your business <span className="text-primary">deserves</span>.</div>
+                <div className="text-[13px] tracking-[0.1em] text-white">DEXA DOORS</div>
+                <div className="mt-2 text-[13px] text-[#6B6B6B]">We build what your business deserves.</div>
               </div>
               <div className="flex items-center gap-8">
-                <a href="#services" className="text-sm text-muted-foreground hover:text-foreground">Services</a>
-                <a href="#work" className="text-sm text-muted-foreground hover:text-foreground">Work</a>
-                <a href="#contact" className="text-sm text-muted-foreground hover:text-foreground">Contact</a>
+                <a href="#services" className="text-[13px] text-[#6B6B6B] transition-colors hover:text-white">Services</a>
+                <a href="#work" className="text-[13px] text-[#6B6B6B] transition-colors hover:text-white">Work</a>
+                <a href="#contact" className="text-[13px] text-[#6B6B6B] transition-colors hover:text-white">Contact</a>
               </div>
             </div>
-            <div className="mt-10 border-t border-border pt-6 text-xs text-muted-foreground">
+            <div className="mt-12 border-t border-[rgba(255,255,255,0.06)] pt-8 text-[12px] text-[#6B6B6B]">
               Copyright © 2026 Dexa Doors. All rights reserved.
             </div>
           </div>
