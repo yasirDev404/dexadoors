@@ -106,9 +106,10 @@ function Home() {
         <div className="relative flex h-full flex-1 items-center overflow-visible">
           <a href="#top" className="block">
             <img
+              id="dexa-nav-logo"
               src="/newlogo.png"
               alt="Dexa Doors"
-              className="h-14 w-auto object-contain md:h-[80px]"
+              className="h-auto max-h-[52px] w-auto object-contain"
             />
           </a>
         </div>
