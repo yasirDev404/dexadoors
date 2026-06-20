@@ -76,9 +76,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Dexa Doors" },
       { name: "description", content: "We handle everything digital so you can focus on running your business." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://dexa-doors.vercel.app/logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://dexa-doors.vercel.app/logo.png" },
     ],
     links: [
+      { rel: "icon", href: "/logo.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/logo.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
