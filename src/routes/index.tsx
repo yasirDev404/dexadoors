@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+
+import { HeroFloatingLines } from "../components/backgrounds/hero-floating-lines";
 import {
   ArrowRight,
   Layers,
@@ -92,65 +94,91 @@ const differences = [
 
 function Home() {
   return (
-    <div className="min-h-screen bg-[#080808] text-[#F2F2F2] antialiased">
+    <div className="relative z-[1] min-h-screen text-[#F2F2F2] antialiased">
       {/* NAV */}
-      <nav className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-        <div
-          className="flex h-[52px] w-full max-w-[680px] items-center justify-between rounded-full px-5"
-          style={{
-            background: "rgba(12, 12, 12, 0.85)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
-          }}
-        >
-          <a
-            href="#top"
-            className="text-[13px] tracking-[0.1em] text-white"
-          >
-            DEXA DOORS
+      <nav
+        className="fixed inset-x-0 top-0 z-50 flex h-[52px] max-h-[52px] items-center px-8"
+        style={{
+          background: "rgba(8, 8, 8, 0.6)",
+          backdropFilter: "blur(12px) saturate(150%)",
+          WebkitBackdropFilter: "blur(12px) saturate(150%)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+        }}
+      >
+        <div className="flex flex-1 items-center">
+          <a href="#top">
+            <img src="/dexa-doors-logo.png" alt="Dexa Doors" className="h-7 w-auto" />
           </a>
-          <div className="hidden items-center gap-6 md:flex">
-            <a href="#services" className="text-[13px] text-[#A0A0A0] transition-colors hover:text-white">Services</a>
-            <a href="#work" className="text-[13px] text-[#A0A0A0] transition-colors hover:text-white">Work</a>
-            <a href="#contact" className="text-[13px] text-[#A0A0A0] transition-colors hover:text-white">Contact</a>
-          </div>
+        </div>
+        <div className="hidden items-center gap-7 md:flex">
+          <a
+            href="#services"
+            className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
+          >
+            Services
+          </a>
+          <a
+            href="#work"
+            className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
+          >
+            Work
+          </a>
           <a
             href="#contact"
-            className="rounded-full bg-[#2563EB] px-4 py-2 text-[13px] text-white transition-opacity hover:opacity-90"
+            className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
           >
-            Let's Talk
+            Contact
+          </a>
+        </div>
+        <div className="flex flex-1 items-center justify-end">
+          <a
+            href="#contact"
+            className="rounded-[6px] border border-[rgba(37,99,235,0.55)] bg-transparent px-4 py-1.5 text-[13px] text-[#93b4f0] transition-all duration-200 hover:border-[#2563EB] hover:bg-[rgba(37,99,235,0.12)] hover:text-white"
+          >
+            Let&apos;s Talk
           </a>
         </div>
       </nav>
 
       <main id="top">
         {/* HERO */}
-        <section className="flex min-h-screen items-center">
-          <div className="mx-auto w-full max-w-5xl px-6 py-[140px]">
-            <h1 className="max-w-4xl font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
-              Your business deserves more than just a website.
-            </h1>
-            <p className="mt-8 max-w-[520px] text-[18px] leading-[1.7] text-[#6B6B6B]">
-              From custom platforms to AI-powered systems — we take over your entire digital presence so you stop worrying about technology and start seeing results.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-6 py-2.5 text-[14px] text-white transition-opacity hover:opacity-90"
-              >
-                Start a Project <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href="#work"
-                className="inline-flex items-center rounded-full border border-[rgba(255,255,255,0.08)] px-6 py-2.5 text-[14px] text-[#F2F2F2] transition-colors hover:border-[rgba(255,255,255,0.16)]"
-              >
-                See Our Work
-              </a>
+        <section className="flex min-h-screen items-center pt-[52px]">
+          <div className="mx-auto flex w-full max-w-5xl flex-col px-6 py-[140px] md:flex-row md:items-center md:gap-12">
+            <div className="w-full text-left md:w-[55%]">
+              <h1 className="max-w-xl font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
+                Your business deserves more than just a website.
+              </h1>
+              <p className="mt-8 max-w-[520px] text-[18px] leading-[1.7] text-[#6B6B6B]">
+                From custom platforms to AI-powered systems — we take over your entire digital presence so you stop worrying about technology and start seeing results.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-6 py-2.5 text-[14px] text-white transition-opacity hover:opacity-90"
+                >
+                  Start a Project <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="#work"
+                  className="inline-flex items-center rounded-full border border-[rgba(255,255,255,0.08)] px-6 py-2.5 text-[14px] text-[#F2F2F2] transition-colors hover:border-[rgba(255,255,255,0.16)]"
+                >
+                  See Our Work
+                </a>
+              </div>
+              <p className="mt-10 text-[13px] text-[#6B6B6B]">
+                Trusted by businesses in the UK, Netherlands & beyond.
+              </p>
             </div>
-            <p className="mt-10 text-[13px] text-[#6B6B6B]">
-              Trusted by businesses in the UK, Netherlands & beyond.
-            </p>
+            <div className="relative mt-12 h-[480px] w-full overflow-hidden md:mt-0 md:w-[45%]">
+              <HeroFloatingLines />
+              <div
+                className="pointer-events-none absolute inset-0 z-10"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center, transparent 35%, #080808 100%)",
+                }}
+              />
+            </div>
           </div>
         </section>
 
