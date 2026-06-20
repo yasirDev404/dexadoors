@@ -35,7 +35,6 @@ export const Route = createFileRoute("/")({
         content:
           "From custom platforms to AI-powered systems — we take over your entire digital presence so you stop worrying about technology and start seeing results.",
       },
-      { property: "og:image", content: "https://dexa-doors.vercel.app/logo.png" },
     ],
   }),
   component: Home,
@@ -97,12 +96,8 @@ function Home() {
       {/* NAV */}
       <header className="sticky top-0 z-50 border-b border-border bg-background">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <a href="#top" className="flex shrink-0 items-center">
-            <img
-              src="/logo.png"
-              alt="Dexa Doors"
-              className="h-9 w-auto max-w-[140px] object-contain object-left"
-            />
+          <a href="#top" className="text-sm font-semibold tracking-[0.18em] text-foreground">
+            DEXA DOORS
           </a>
           <div className="hidden items-center gap-8 md:flex">
             <a href="#services" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Services</a>
@@ -422,11 +417,8 @@ function Home() {
           <div className="mx-auto max-w-6xl px-6 py-14">
             <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
               <div>
-                <img
-                  src="/logo.png"
-                  alt="Dexa Doors"
-                  className="h-16 w-auto max-w-[200px] object-contain object-left"
-                />
+                <div className="text-sm font-semibold tracking-[0.18em] text-foreground">DEXA DOORS</div>
+                <div className="mt-2 text-sm text-muted-foreground">We build what your business <span className="text-primary">deserves</span>.</div>
               </div>
               <div className="flex items-center gap-8">
                 <a href="#services" className="text-sm text-muted-foreground hover:text-foreground">Services</a>
