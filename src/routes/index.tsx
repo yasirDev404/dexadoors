@@ -105,7 +105,7 @@ function Home() {
           borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
         }}
       >
-        <div className="mx-auto grid h-full w-full max-w-5xl grid-cols-[1fr_auto_1fr] items-center">
+        <div className="mx-auto grid h-full w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center">
           <div className="relative flex h-full items-center overflow-visible">
             <a href="#top" className="block">
               <img
