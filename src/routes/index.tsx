@@ -102,7 +102,6 @@ function Home() {
           background: "rgba(8, 8, 8, 0.6)",
           backdropFilter: "blur(12px) saturate(150%)",
           WebkitBackdropFilter: "blur(12px) saturate(150%)",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
         }}
       >
         <div className="mx-auto grid h-full w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center">
@@ -145,6 +144,7 @@ function Home() {
             </a>
           </div>
         </div>
+        <div className="nav-border-glow pointer-events-none absolute right-4 bottom-0 left-4 mx-auto max-w-6xl md:right-6 md:left-6" aria-hidden="true" />
       </nav>
 
       <main id="top">

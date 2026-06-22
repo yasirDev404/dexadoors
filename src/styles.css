@@ -137,4 +137,57 @@
       0 0 18px rgba(255, 255, 255, 0.4),
       0 0 36px rgba(255, 255, 255, 0.18);
   }
+
+  /* Animated nav bottom edge — light sweeps left-to-right every 4s, brightest at center */
+  .nav-border-glow {
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .nav-border-glow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 15%,
+      rgba(255, 255, 255, 0.04) 25%,
+      rgba(255, 255, 255, 0.12) 35%,
+      rgba(255, 255, 255, 0.55) 48%,
+      rgba(255, 255, 255, 0.55) 52%,
+      rgba(255, 255, 255, 0.12) 65%,
+      rgba(255, 255, 255, 0.04) 75%,
+      transparent 85%,
+      transparent 100%
+    );
+    animation: nav-glow-sweep 4s ease-in-out infinite;
+  }
+
+  /* Soft fade at edges so the line never hard-stops */
+  .nav-border-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #080808 0%,
+      transparent 8%,
+      transparent 92%,
+      #080808 100%
+    );
+    pointer-events: none;
+  }
+
+  @keyframes nav-glow-sweep {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
 }
