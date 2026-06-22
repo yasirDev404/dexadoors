@@ -148,7 +148,7 @@
       position: absolute;
       top: calc(52px + 6vh);
       bottom: 6vh;
-      left: clamp(280px, 32vw, 480px);
+      left: clamp(320px, 38vw, 540px);
       right: 0;
       order: unset;
       width: auto;
@@ -157,9 +157,9 @@
       margin-top: 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       padding-right: max(0px, env(safe-area-inset-right, 0px));
-      transform: translateY(-2rem);
+      transform: translate(2.5rem, -2rem);
     }
 
     .hero-spline__canvas {
@@ -168,7 +168,7 @@
       max-height: min(86vh, 900px);
       min-height: 0;
       transform: scale(0.8);
-      transform-origin: center center;
+      transform-origin: 72% center;
     }
   }
 
