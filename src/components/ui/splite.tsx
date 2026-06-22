@@ -31,7 +31,9 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
 
   return (
     <Suspense fallback={<SplineFallback className={className} />}>
-      <Spline scene={scene} className={className} />
+      <div className={cn("overflow-visible", className)}>
+        <Spline scene={scene} className="h-full w-full" />
+      </div>
     </Suspense>
   );
 }
