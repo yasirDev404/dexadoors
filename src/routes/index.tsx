@@ -152,8 +152,8 @@ function Home() {
         {/* HERO — SideRays live here only; they scroll away with this section */}
         <section className="relative flex min-h-screen items-center pt-[52px]">
           <HeroRaysBackground />
-          <div className="relative z-[1] mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-6 py-[140px] lg:grid-cols-2 lg:gap-10">
-            <div className="w-full max-w-xl self-center text-left">
+          <div className="relative z-[1] mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 py-[140px] sm:px-6 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)] lg:gap-8 lg:pl-0 lg:pr-6 xl:max-w-7xl">
+            <div className="w-full max-w-xl self-center text-left lg:max-w-none">
               <h1 className="font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
                 Your business deserves more than just a website.
               </h1>

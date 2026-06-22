@@ -116,10 +116,15 @@
     pointer-events: none;
   }
 
-  /* Hero Spline — tall stage, overflow visible so animations aren't clipped */
+  /* Hero Spline — wide stage, lifted, overflow visible so arms aren't clipped */
   .hero-spline {
     min-height: 480px;
-    width: 100%;
+    width: calc(100% + 3rem);
+    max-width: none;
+    margin-inline: -1.5rem;
+    margin-top: -3rem;
+    padding-inline: 2rem;
+    overflow: visible;
   }
 
   .hero-spline__canvas {
@@ -139,6 +144,10 @@
   @media (min-width: 1024px) {
     .hero-spline {
       min-height: 620px;
+      width: calc(100% + 8rem);
+      margin-inline: -4rem;
+      margin-top: -4.5rem;
+      padding-inline: 3rem;
     }
 
     .hero-spline__canvas {
