@@ -138,7 +138,7 @@
       0 0 36px rgba(255, 255, 255, 0.18);
   }
 
-  /* Nav bottom edge — light enters right, sweeps left, darkness swallows, ~2.5s pause, repeat */
+  /* Nav bottom edge — 8s cycle: constant-speed left sweep, smooth fades, ~3.6s dark pause */
   .nav-border-glow {
     height: 1px;
     overflow: hidden;
@@ -149,22 +149,23 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 42%;
+    width: 55%;
     height: 100%;
-    /* Bright leading edge on the left; long tail fades right (darkness swallowing the wake) */
+    /* Soft comet: bright head left, long tail dissolves right */
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.03) 6%,
-      rgba(255, 255, 255, 0.55) 16%,
-      rgba(255, 255, 255, 0.82) 26%,
-      rgba(255, 255, 255, 0.42) 40%,
-      rgba(255, 255, 255, 0.18) 55%,
-      rgba(255, 255, 255, 0.06) 70%,
-      rgba(255, 255, 255, 0.015) 85%,
+      rgba(255, 255, 255, 0.02) 4%,
+      rgba(255, 255, 255, 0.12) 10%,
+      rgba(255, 255, 255, 0.45) 18%,
+      rgba(255, 255, 255, 0.72) 28%,
+      rgba(255, 255, 255, 0.38) 42%,
+      rgba(255, 255, 255, 0.14) 58%,
+      rgba(255, 255, 255, 0.05) 72%,
+      rgba(255, 255, 255, 0.01) 86%,
       transparent 100%
     );
-    animation: nav-glow-pulse 6.5s ease-in-out infinite;
+    animation: nav-glow-pulse 8s linear infinite;
     will-change: transform, opacity;
   }
 
@@ -176,45 +177,45 @@
     background: linear-gradient(
       90deg,
       #080808 0%,
-      transparent 10%,
-      transparent 90%,
+      transparent 12%,
+      transparent 88%,
       #080808 100%
     );
     pointer-events: none;
   }
 
+  /*
+   * Transform moves at one constant rate (0%→55%): 240% → -240% over 4.4s.
+   * Every keyframe position follows: 240% − (t / 55 × 480%).
+   * Opacity fades in/out independently so travel speed never eases.
+   */
   @keyframes nav-glow-pulse {
-    /* Hidden off the right */
     0% {
-      transform: translateX(240%);
+      transform: translate3d(240%, 0, 0);
       opacity: 0;
     }
-    /* Fade in — light emerges from the right */
-    6% {
-      transform: translateX(200%);
-      opacity: 0.35;
+    5% {
+      transform: translate3d(196%, 0, 0);
+      opacity: 0.45;
     }
-    10% {
-      transform: translateX(170%);
+    9% {
+      transform: translate3d(161%, 0, 0);
       opacity: 1;
     }
-    /* Sweep left across the bar */
-    38% {
-      transform: translateX(-130%);
+    40% {
+      transform: translate3d(-109%, 0, 0);
       opacity: 1;
     }
-    /* Darkness swallows — tail dissolves as it exits left */
-    44% {
-      transform: translateX(-175%);
-      opacity: 0.25;
+    47% {
+      transform: translate3d(-170%, 0, 0);
+      opacity: 0.4;
     }
-    48% {
-      transform: translateX(-220%);
+    55% {
+      transform: translate3d(-240%, 0, 0);
       opacity: 0;
     }
-    /* Rest in darkness ~2.5s before reappearing */
     100% {
-      transform: translateX(-220%);
+      transform: translate3d(-240%, 0, 0);
       opacity: 0;
     }
   }
