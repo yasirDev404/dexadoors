@@ -97,7 +97,7 @@ function Home() {
     <div className="relative z-[1] min-h-screen text-[#F2F2F2] antialiased">
       {/* NAV */}
       <nav
-        className="fixed inset-x-0 top-0 z-50 flex h-[52px] max-h-[52px] items-stretch overflow-visible px-8"
+        className="fixed inset-x-0 top-0 z-50 flex h-[52px] max-h-[52px] items-stretch overflow-visible px-4 md:px-6"
         style={{
           background: "rgba(8, 8, 8, 0.6)",
           backdropFilter: "blur(12px) saturate(150%)",
@@ -105,43 +105,45 @@ function Home() {
           borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
         }}
       >
-        <div className="relative flex h-full flex-1 items-center overflow-visible">
-          <a href="#top" className="block">
-            <img
-              id="dexa-nav-logo"
-              src="/newlogo.png"
-              alt="Dexa Doors"
-              className="h-auto max-h-[52px] w-auto object-contain"
-            />
-          </a>
-        </div>
-        <div className="hidden h-full items-center gap-7 md:flex">
-          <a
-            href="#services"
-            className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
-          >
-            Services
-          </a>
-          <a
-            href="#work"
-            className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
-          >
-            Work
-          </a>
-          <a
-            href="#contact"
-            className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
-          >
-            Contact
-          </a>
-        </div>
-        <div className="flex h-full flex-1 items-center justify-end">
-          <a
-            href="#contact"
-            className="nav-cta rounded-full border border-[rgba(32,32,31,0.75)] px-4 py-1.5 text-[13px] font-medium transition-all duration-300"
-          >
-            Let&apos;s Talk
-          </a>
+        <div className="mx-auto grid h-full w-full max-w-5xl grid-cols-[1fr_auto_1fr] items-center">
+          <div className="relative flex h-full items-center overflow-visible">
+            <a href="#top" className="block">
+              <img
+                id="dexa-nav-logo"
+                src="/newlogo.png"
+                alt="Dexa Doors"
+                className="h-auto max-h-[52px] w-auto object-contain"
+              />
+            </a>
+          </div>
+          <div className="hidden h-full items-center gap-7 md:flex">
+            <a
+              href="#services"
+              className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
+            >
+              Services
+            </a>
+            <a
+              href="#work"
+              className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
+            >
+              Work
+            </a>
+            <a
+              href="#contact"
+              className="text-[13px] font-normal text-[#9a9a9a] transition-colors duration-150 hover:text-[#f2f2f2]"
+            >
+              Contact
+            </a>
+          </div>
+          <div className="flex h-full items-center justify-end">
+            <a
+              href="#contact"
+              className="nav-cta rounded-full border border-[rgba(32,32,31,0.75)] px-4 py-1.5 text-[13px] font-medium transition-all duration-300"
+            >
+              Let&apos;s Talk
+            </a>
+          </div>
         </div>
       </nav>
 
