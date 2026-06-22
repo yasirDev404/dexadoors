@@ -114,4 +114,22 @@
     background: #050505;
     pointer-events: none;
   }
+
+  .nav-cta {
+    background:
+      radial-gradient(circle at 0% 0%, rgb(17, 17, 17) 0, transparent 55%),
+      radial-gradient(circle at 100% 0%, rgb(25, 25, 24) 0, transparent 55%),
+      radial-gradient(circle at 0% 100%, rgb(16, 16, 16) 0, transparent 55%),
+      radial-gradient(circle at 100% 100%, rgb(26, 26, 25) 0, transparent 55%),
+      rgb(20, 20, 19);
+  }
+
+  .nav-cta:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+    box-shadow:
+      0 0 18px rgba(255, 255, 255, 0.4),
+      0 0 36px rgba(255, 255, 255, 0.18);
+  }
 }

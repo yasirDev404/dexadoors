@@ -138,7 +138,7 @@ function Home() {
         <div className="flex h-full flex-1 items-center justify-end">
           <a
             href="#contact"
-            className="rounded-[6px] border border-[rgba(255,255,255,0.35)] bg-[rgba(255,255,255,0.06)] px-4 py-1.5 text-[13px] font-medium text-[#f2f2f2] shadow-[0_0_12px_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-white hover:bg-[rgba(255,255,255,0.12)] hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.35),0_0_40px_rgba(255,255,255,0.15),inset_0_0_12px_rgba(255,255,255,0.08)]"
+            className="nav-cta rounded-full border border-[rgb(32,32,31)] px-4 py-1.5 text-[13px] font-medium text-white transition-all duration-300"
           >
             Let&apos;s Talk
           </a>
