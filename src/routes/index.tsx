@@ -150,10 +150,17 @@ function Home() {
 
       <main id="top">
         {/* HERO — SideRays live here only; they scroll away with this section */}
-        <section className="relative flex min-h-screen items-center pt-[52px]">
+        <section className="relative flex min-h-screen flex-col justify-center overflow-x-clip pt-[52px]">
           <HeroRaysBackground />
-          <div className="relative z-[1] mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 py-[140px] sm:px-6 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)] lg:gap-8 lg:pl-0 lg:pr-6 xl:max-w-7xl">
-            <div className="w-full max-w-xl self-center text-left lg:max-w-none">
+          <div className="hero-spline">
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="hero-spline__canvas"
+              waitForIntro
+            />
+          </div>
+          <div className="relative z-[1] order-1 mx-auto w-full max-w-6xl px-4 py-[140px] sm:px-6 lg:max-w-7xl lg:pl-0 lg:pr-6">
+            <div className="w-full max-w-xl text-left lg:max-w-[min(520px,38vw)]">
               <h1 className="font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
                 Your business deserves more than just a website.
               </h1>
@@ -177,14 +184,6 @@ function Home() {
               <p className="mt-10 text-[13px] text-[#6B6B6B]">
                 Trusted by businesses in the UK, Netherlands & beyond.
               </p>
-            </div>
-
-            <div className="hero-spline flex w-full items-center justify-end self-center overflow-visible">
-              <SplineScene
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="hero-spline__canvas"
-                waitForIntro
-              />
             </div>
           </div>
         </section>
