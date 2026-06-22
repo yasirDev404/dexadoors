@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 import { HeroRaysBackground } from "@/components/backgrounds/hero-rays-background";
-import { SplineSceneBasic } from "@/components/spline-scene-basic";
+import { SplineScene } from "@/components/ui/splite";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -152,7 +152,7 @@ function Home() {
         {/* HERO — SideRays live here only; they scroll away with this section */}
         <section className="relative flex min-h-screen items-center overflow-hidden pt-[52px]">
           <HeroRaysBackground />
-          <div className="relative z-[1] mx-auto w-full max-w-5xl px-6 py-[140px]">
+          <div className="relative z-[1] mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-6 py-[140px] lg:grid-cols-2 lg:gap-10">
             <div className="w-full max-w-xl text-left">
               <h1 className="font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
                 Your business deserves more than just a website.
@@ -178,13 +178,13 @@ function Home() {
                 Trusted by businesses in the UK, Netherlands & beyond.
               </p>
             </div>
-          </div>
-        </section>
 
-        {/* INTERACTIVE 3D */}
-        <section aria-label="Interactive 3D showcase">
-          <div className="mx-auto max-w-5xl px-6 py-[140px]">
-            <SplineSceneBasic />
+            <div className="relative h-[340px] w-full sm:h-[420px] lg:h-[min(560px,72vh)]">
+              <SplineScene
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="h-full w-full"
+              />
+            </div>
           </div>
         </section>
 
