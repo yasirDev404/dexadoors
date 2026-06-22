@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 import SideRays from "./side-rays";
 
-export function SiteBackground() {
+/** SideRays scoped to a hero section — scrolls away with the page, does not follow the viewport. */
+export function HeroRaysBackground() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ export function SiteBackground() {
   }
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
       <SideRays
         rayColor1="#FFFFFF"
         rayColor2="#FFFFFF"

@@ -20,6 +20,8 @@ import {
   CalendarDays,
 } from "lucide-react";
 
+import { HeroRaysBackground } from "@/components/backgrounds/hero-rays-background";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -144,9 +146,10 @@ function Home() {
       </nav>
 
       <main id="top">
-        {/* HERO */}
-        <section className="flex min-h-screen items-center pt-[52px]">
-          <div className="mx-auto w-full max-w-5xl px-6 py-[140px]">
+        {/* HERO — SideRays live here only; they scroll away with this section */}
+        <section className="relative flex min-h-screen items-center overflow-hidden pt-[52px]">
+          <HeroRaysBackground />
+          <div className="relative z-[1] mx-auto w-full max-w-5xl px-6 py-[140px]">
             <div className="w-full max-w-xl text-left">
               <h1 className="font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
                 Your business deserves more than just a website.
@@ -174,8 +177,6 @@ function Home() {
             </div>
           </div>
         </section>
-
-        {/* SERVICES */}
         <section id="services">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-2xl">

@@ -10,7 +10,6 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { SiteBackground } from "../components/backgrounds/site-background";
 import { IntroOverlay } from "../components/intro/intro-overlay";
 import {
   INTRO_BOOT_CRITICAL_CSS,
@@ -110,7 +109,6 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         <div id="site-shell">
-          <SiteBackground />
           {children}
         </div>
         <IntroOverlay />
