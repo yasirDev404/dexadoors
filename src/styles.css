@@ -30,6 +30,7 @@
   --color-ring: var(--ring);
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
 }
 
 :root {
@@ -218,5 +219,16 @@
       transform: translate3d(-240%, 0, 0);
       opacity: 0;
     }
+  }
+}
+
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
   }
 }

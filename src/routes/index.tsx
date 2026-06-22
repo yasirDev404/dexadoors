@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import { HeroRaysBackground } from "@/components/backgrounds/hero-rays-background";
+import { SplineSceneBasic } from "@/components/spline-scene-basic";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -179,6 +180,14 @@ function Home() {
             </div>
           </div>
         </section>
+
+        {/* INTERACTIVE 3D */}
+        <section aria-label="Interactive 3D showcase">
+          <div className="mx-auto max-w-5xl px-6 py-[140px]">
+            <SplineSceneBasic />
+          </div>
+        </section>
+
         <section id="services">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-2xl">
