@@ -1,5 +1,11 @@
 export const INTRO_PLAYED_KEY = "dexadoors-intro-played";
 export const INTRO_BOOT_CLASS = "intro-boot-pending";
+export const INTRO_COMPLETE_EVENT = "dexadoors:intro-complete";
+
+export function dispatchIntroComplete() {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent(INTRO_COMPLETE_EVENT));
+}
 
 /** Synchronous check — safe to call during first client render. */
 export function shouldSkipIntroSync(): boolean {

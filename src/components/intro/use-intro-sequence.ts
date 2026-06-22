@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { animate } from "framer-motion";
 
-import { clearIntroBootPending, INTRO_PLAYED_KEY, shouldSkipIntroSync } from "./intro-boot";
+import { clearIntroBootPending, dispatchIntroComplete, INTRO_PLAYED_KEY, shouldSkipIntroSync } from "./intro-boot";
 import { logIntroElement, logIntroPhase } from "./intro-debug";
 import {
   type DockGeometry,
@@ -101,6 +101,7 @@ export function useIntroSequence() {
     setSkipIntro(skip);
     if (skip) {
       clearIntroBootPending();
+      dispatchIntroComplete();
       logIntroPhase("skip");
       setDone(true);
       return;
@@ -116,6 +117,7 @@ export function useIntroSequence() {
       setPhase("done");
       logIntroPhase("done");
       setDone(true);
+      dispatchIntroComplete();
     };
 
     const safety = setTimeout(() => {

@@ -179,10 +179,11 @@ function Home() {
               </p>
             </div>
 
-            <div className="hero-spline flex w-full items-center justify-center self-center overflow-visible">
+            <div className="hero-spline flex w-full items-center justify-end self-center overflow-visible">
               <SplineScene
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                 className="hero-spline__canvas"
+                waitForIntro
               />
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
+import { useIntroComplete } from "@/hooks/use-intro-complete";
 import { cn } from "@/lib/utils";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
@@ -8,6 +9,8 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 interface SplineSceneProps {
   scene: string;
   className?: string;
+  /** Defer Spline load until the homepage intro animation finishes. */
+  waitForIntro?: boolean;
 }
 
 function SplineFallback({ className }: { className?: string }) {
@@ -18,12 +21,18 @@ function SplineFallback({ className }: { className?: string }) {
   );
 }
 
-export function SplineScene({ scene, className }: SplineSceneProps) {
+export function SplineScene({ scene, className, waitForIntro = false }: SplineSceneProps) {
+  const introComplete = useIntroComplete();
   const [mounted, setMounted] = useState(false);
+  const ready = !waitForIntro || introComplete;
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (ready) setMounted(true);
+  }, [ready]);
+
+  if (!ready) {
+    return <div className={cn("overflow-visible", className)} aria-hidden />;
+  }
 
   if (!mounted) {
     return <SplineFallback className={className} />;

@@ -116,15 +116,16 @@
     pointer-events: none;
   }
 
-  /* Hero Spline — wide stage, lifted, overflow visible so arms aren't clipped */
+  /* Hero Spline — extra-wide stage, scaled down, shifted up + right */
   .hero-spline {
     min-height: 480px;
-    width: calc(100% + 3rem);
+    width: calc(100% + 10rem);
     max-width: none;
-    margin-inline: -1.5rem;
-    margin-top: -3rem;
-    padding-inline: 2rem;
+    margin-left: -2rem;
+    margin-right: -8rem;
+    padding-inline: 4rem;
     overflow: visible;
+    transform: translate(1.5rem, -5.5rem);
   }
 
   .hero-spline__canvas {
@@ -132,6 +133,8 @@
     height: min(720px, 78vh);
     min-height: 480px;
     overflow: visible;
+    transform: scale(0.86);
+    transform-origin: 58% 68%;
   }
 
   .hero-spline__canvas > div,
@@ -144,15 +147,18 @@
   @media (min-width: 1024px) {
     .hero-spline {
       min-height: 620px;
-      width: calc(100% + 8rem);
-      margin-inline: -4rem;
-      margin-top: -4.5rem;
-      padding-inline: 3rem;
+      width: calc(100% + 20rem);
+      margin-left: -4rem;
+      margin-right: -16rem;
+      padding-inline: 5rem 6rem;
+      transform: translate(4rem, -9rem);
     }
 
     .hero-spline__canvas {
       height: min(760px, 82vh);
       min-height: 620px;
+      transform: scale(0.8);
+      transform-origin: 62% 66%;
     }
   }
 
