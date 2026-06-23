@@ -99,6 +99,11 @@
     will-change: transform;
   }
 
+  .stat-chip {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -234,6 +239,86 @@
       opacity: 0;
     }
   }
+}
+
+/* Premium surfaces — visual elevation (no animation hook changes) */
+
+.hero-mockup-preview {
+  filter: blur(2px);
+}
+
+@keyframes hero-mockup-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.hero-mockup-float {
+  animation: hero-mockup-float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mockup-float {
+    animation: none;
+  }
+}
+
+.section-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.service-card {
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.25s;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: 0.75rem 0.75rem 0 0;
+  background: rgba(37, 99, 235, 0);
+  transition: background 0.25s;
+  pointer-events: none;
+}
+
+.service-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.service-card:hover::before {
+  background: rgba(37, 99, 235, 0.4);
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes spotlight {

@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
+import { HeroDeviceMockup } from "@/components/hero/hero-device-mockup";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -152,8 +153,11 @@ function Home() {
       </nav>
 
       <main id="top" ref={mainRef}>
-        <section className="relative flex min-h-screen items-center pt-[52px]">
-          <div className="relative z-[1] mx-auto w-full max-w-5xl px-6 py-[140px]">
+        <section className="relative flex min-h-screen items-center overflow-hidden pt-[52px]">
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[55%] lg:block">
+            <HeroDeviceMockup />
+          </div>
+          <div className="relative z-[1] mx-auto grid w-full max-w-5xl px-6 py-[120px] lg:grid-cols-2 lg:py-[140px]">
             <div className="w-full max-w-xl text-left">
               <h1 className="hero-title font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] will-change-transform md:text-[72px]">
                 Your business deserves more than just a website.
@@ -182,9 +186,9 @@ function Home() {
           </div>
         </section>
 
-        <section id="services">
+        <section id="services" className="section-divider">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
-            <div className="max-w-2xl">
+            <div className="section-intro relative z-[2] max-w-2xl">
               <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 Tired of managing agencies that don't talk to each other?
               </h2>
@@ -193,11 +197,11 @@ function Home() {
               </p>
             </div>
 
-            <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="section-cards relative z-[1] mt-20 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-[88px] md:translate-y-3 lg:grid-cols-3">
               {services.map(({ icon: Icon, name, desc }) => (
                 <div
                   key={name}
-                  className="service-card flex flex-col gap-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8 transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
+                  className="service-card flex flex-col gap-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8"
                 >
                   <Icon className="h-5 w-5 text-[#6B6B6B]" />
                   <h3 className="text-[16px] font-medium text-[#F2F2F2]">{name}</h3>
@@ -209,11 +213,14 @@ function Home() {
         </section>
 
         {/* STATS */}
-        <section id="stats">
+        <section id="stats" className="section-divider">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
-            <div className="grid grid-cols-2 gap-y-16 md:grid-cols-4">
+            <p className="mb-12 text-center text-[11px] uppercase tracking-[0.12em] text-[#6B6B6B] md:mb-16">
+              By the numbers
+            </p>
+            <div className="grid grid-cols-2 gap-y-12 md:grid-cols-4 md:gap-y-0">
               {stats.map((s) => (
-                <div key={s.label}>
+                <div key={s.label} className="stat-chip border-l border-[rgba(37,99,235,0.3)] pl-6 md:pl-8">
                   <div
                     className="stat-number font-serif text-[48px] font-bold text-white md:text-[64px]"
                     data-value={s.num}
@@ -228,21 +235,21 @@ function Home() {
         </section>
 
         {/* WORK */}
-        <section id="work">
+        <section id="work" className="section-divider">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
-            <div className="max-w-2xl">
+            <div className="section-intro relative z-[2] max-w-2xl">
               <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 Real projects. Real businesses.
               </h2>
             </div>
-            <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="section-cards relative z-[1] mt-20 grid grid-cols-1 gap-6 md:mt-[88px] md:translate-y-3 md:grid-cols-2">
               {projects.map((p) => (
                 <div
                   key={p.name}
                   className="project-card group flex flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
                   <div className="px-8 pt-8">
-                    <span className="text-[12px] uppercase tracking-[0.08em] text-[#6B6B6B]">
+                    <span className="inline-flex rounded-full border border-[rgba(255,255,255,0.08)] bg-[#080808] px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-[#6B6B6B]">
                       {p.tag}
                     </span>
                   </div>
@@ -265,14 +272,14 @@ function Home() {
         </section>
 
         {/* DIFFERENCE */}
-        <section>
+        <section className="section-divider">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
-            <div className="max-w-3xl">
+            <div className="section-intro relative z-[2] max-w-3xl">
               <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 You're not hiring a vendor. You're gaining a partner.
               </h2>
             </div>
-            <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="section-cards relative z-[1] mt-20 grid grid-cols-1 gap-6 md:mt-[88px] md:translate-y-3 md:grid-cols-3">
               {differences.map(({ icon: Icon, title, desc }) => (
                 <div
                   key={title}
@@ -288,7 +295,7 @@ function Home() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact">
+        <section id="contact" className="section-divider">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
@@ -373,7 +380,7 @@ function Home() {
         </section>
 
         {/* BOOK A CALL */}
-        <section id="book">
+        <section id="book" className="section-divider">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">

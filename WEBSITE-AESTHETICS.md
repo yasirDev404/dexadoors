@@ -15,7 +15,7 @@ The site prioritizes:
 - **Quiet luxury** — borders and glows are low-contrast; hover states are felt, not shouted
 - **Purposeful motion** — animation appears only where it adds meaning (intro boot, nav edge glow, scroll reveals)
 
-There is **no hero background illustration, light rays, or 3D model** in the current build. The hero is plain `#080808` with typography and CTAs only.
+There is **no hero background illustration, light rays, or 3D model** in the current build. The hero uses plain `#080808` with typography and CTAs on the left; on desktop (`lg+`) a **glass browser mockup** with a blurred dashboard skeleton sits on the right.
 
 ---
 
@@ -145,7 +145,7 @@ Three-column grid: `grid-cols-[1fr_auto_1fr]` — logo left, links centered, CTA
 
 ## Surfaces & depth
 
-The site uses **flat dark layers**, not heavy shadows.
+The site uses **layered dark surfaces** with restrained elevation — flat by default, depth on intentional hover.
 
 ### Card pattern (services, projects, difference)
 
@@ -154,11 +154,29 @@ rounded-xl
 border border-[rgba(255,255,255,0.06)]
 bg-[#111111]
 p-8 (or asymmetric padding on project cards)
-transition-[border-color] duration-200
 hover:border-[rgba(255,255,255,0.14)]
 ```
 
-No box-shadow on cards. Depth is communicated through **background step** (`#080808` → `#111111`) and **border brightening on hover**.
+**Service cards (`.service-card`)** — exception to flat cards:
+
+- Default hairline ring: `box-shadow: 0 0 0 1px rgba(255,255,255,0.06)`
+- Hover: 1px top accent glow `rgba(37,99,235,0.4)` + depth shadow `0 8px 32px rgba(0,0,0,0.4)`
+
+**Project cards (`.project-card`)** — faint SVG noise grain overlay at `opacity: 0.03`; industry tag as pill badge on `#080808`.
+
+**Difference / contact cards** — flat border-only hover (no shadow exception).
+
+Depth is primarily communicated through **background step** (`#080808` → `#111111`) and **border brightening on hover**; service cards add hover elevation only.
+
+### Section layout hierarchy
+
+- `.section-intro` — H2 + subcopy, `z-index: 2`
+- `.section-cards` — grids sit slightly lower (`md:translate-y-3`) with extra top margin
+- `.section-divider` — `border-top: rgba(255,255,255,0.04)` between major sections
+
+### Stats data chips (`.stat-chip`)
+
+Each stat wrapped with left accent line `border-l rgba(37,99,235,0.3)` and generous horizontal padding — reads as a data chip, not a bare numeral.
 
 ### Glass / frosted surfaces
 
@@ -174,7 +192,13 @@ backdrop-filter: blur(12px) saturate(150%);
 - Default: multi-corner radial gradients on translucent dark base + `backdrop-filter: blur(12px) saturate(150%)`
 - Hover: solid white background, black text, white border, soft white glow shadow
 
-This is the most elaborate surface treatment on the site — intentional focal point in the header.
+This is the most elaborate surface treatment in the header — intentional focal point alongside the hero mockup on desktop.
+
+**Hero device mockup (`HeroDeviceMockup`):**
+
+- Right-side glass browser frame (`lg+` only), `backdrop-blur-xl`, `#111111` at 80% opacity
+- CSS dashboard skeleton inside with `blur(2px)` — decorative, `aria-hidden`
+- Slow vertical float (6s); static when `prefers-reduced-motion`
 
 ---
 
@@ -360,29 +384,32 @@ Intro motion uses **Framer Motion** with custom easing curves — snappy pop (`[
 
 ### Hero
 
-- Full viewport height, left-aligned copy block
-- No background effects — pure `#080808`
-- Largest serif headline on the site (`.hero-title`) with scroll-linked parallax
+- Full viewport height; left-aligned copy block (`max-w-xl`)
+- Desktop (`lg+`): glass browser mockup on right 55% — blurred dashboard skeleton, no 3D/WebGL
+- Mobile: text-only hero (mockup hidden)
+- Largest serif headline (`.hero-title`) with scroll-linked parallax
 - Dual CTA row: blue primary + ghost secondary
 - Small trust line in muted gray
 
 ### Services
 
-- Problem-statement H2 (`.section-heading`) + muted explainer — line reveal on scroll
-- 7-card grid (`.service-card`) with staggered scroll enter
+- `.section-intro` heading block + muted explainer — line reveal on scroll
+- `.section-cards` grid below with visual offset (headings lead, cards follow)
+- 7-card grid (`.service-card`) with staggered scroll enter + hover top glow
 - Uniform card height via flex column, icon → title → description
 
 ### Stats
 
-- Open section (`#stats`), no card wrappers
+- Open section (`#stats`) with “By the numbers” micro-label
+- `.stat-chip` wrappers — left blue accent border, generous padding
 - Large serif numerals (`.stat-number`) — count up from 0 on first enter
 - Uppercase micro-labels beneath
 
 ### Work
 
-- Section H2 with line reveal
-- Project cards (`.project-card`) with staggered scale + fade enter
-- Industry/tag line at top; external link as ghost pill at card bottom
+- `.section-intro` H2 with line reveal; `.section-cards` grid offset below
+- Project cards (`.project-card`) with grain overlay + staggered scale/fade enter
+- Industry tag as **pill badge** (`rounded-full`, `#080808` inset); external link as ghost pill at card bottom
 - `group` class present but hover is border-only (no image reveals)
 
 ### Difference (values)
@@ -425,8 +452,8 @@ To avoid aesthetic drift, note what the **current** site does **not** use:
 - No hero background rays, particles, or WebGL (`SideRays` removed from hero)
 - No 3D Spline robot in the hero (removed)
 - No photography or stock imagery in sections
-- No gradients on headlines or backgrounds (except nav CTA glass and nav glow)
-- No drop shadows on cards
+- No gradients on headlines or backgrounds (except nav CTA glass, nav glow, and low-opacity blue in mockup skeleton)
+- No drop shadows on cards except **service card hover elevation**
 - No bright secondary accent colors (orange, green, etc.)
 - No scroll animation on difference-section value cards or body paragraphs (headings, service cards, stats, and project cards only)
 
@@ -444,7 +471,8 @@ When adding new UI, match these patterns:
 6. **Spacing** — `py-[140px]` sections, `px-6` gutters, `max-w-5xl` content
 7. **Icons** — Lucide, 20px in cards, muted gray
 8. **Motion** — subtle scroll reveals (GSAP); Lenis smooth scroll; fast hover transitions (150–300ms); section headings stay visible after reveal; parallax is gentle (0.12× sections, 0.3× hero)
-9. **Glass** — reserve for nav-level chrome, not every card
+9. **Glass** — nav chrome + hero mockup frame; not every card
+10. **Premium elevation** — service hover glow, stat chips, project grain — see `PREMIUM-REDESIGN.md`
 
 ---
 
@@ -458,9 +486,11 @@ When adding new UI, match these patterns:
 | Lenis smooth scroll provider | `src/components/smooth-scroll/smooth-scroll-provider.tsx` |
 | Homepage scroll animations | `src/hooks/useScrollAnimations.ts` |
 | Scroll animation changelog | `SCROLL-ANIMATIONS-PHASE-1.md` |
+| Premium visual redesign log | `PREMIUM-REDESIGN.md` |
+| Hero device mockup | `src/components/hero/hero-device-mockup.tsx` |
 | Intro overlay aesthetics | `src/components/intro/intro-overlay.tsx` |
 | shadcn config | `components.json` (style: `new-york`) |
 
 ---
 
-*Last updated to reflect Lenis smooth scroll, GSAP scroll reveals, and Phase 1.1 section heading behavior (reveal once + parallax, no fade-out).*
+*Last updated to reflect premium visual redesign: hero mockup, section hierarchy, service hover elevation, stat chips, project grain + pill tags. Scroll animations unchanged.*
