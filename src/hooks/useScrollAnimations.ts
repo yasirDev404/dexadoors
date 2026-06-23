@@ -25,8 +25,13 @@ export function useScrollAnimations(containerRef: RefObject<HTMLElement | null>)
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const scope = containerRef.current!;
         const splits: SplitType[] = [];
+        const headingTweens: gsap.core.Tween[] = [];
+        let cancelled = false;
 
         const setupHeadings = () => {
+          headingTweens.forEach((tween) => tween.kill());
+          headingTweens.length = 0;
+
           splits.forEach((split) => split.revert());
           splits.length = 0;
 
@@ -36,23 +41,49 @@ export function useScrollAnimations(containerRef: RefObject<HTMLElement | null>)
 
             if (!split.lines?.length) return;
 
-            gsap.set(split.lines, { y: 60, opacity: 0, willChange: "transform" });
-
-            gsap.to(split.lines, {
-              y: 0,
-              opacity: 1,
-              duration: 0.9,
-              ease: "power3.out",
-              stagger: 0.08,
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%",
+            const reveal = gsap.fromTo(
+              split.lines,
+              { y: 24, opacity: 0, willChange: "transform" },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                ease: "power2.out",
+                stagger: 0.05,
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top 88%",
+                  once: true,
+                },
               },
-            });
+            );
+
+            headingTweens.push(reveal);
+
+            const section = el.closest("section");
+            if (section) {
+              const parallax = gsap.to(el, {
+                y: () => -(section as HTMLElement).offsetHeight * 0.12,
+                ease: "none",
+                willChange: "transform",
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top top",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              });
+
+              headingTweens.push(parallax);
+            }
           });
         };
 
-        setupHeadings();
+        void document.fonts.ready.then(() => {
+          if (cancelled) return;
+          setupHeadings();
+          ScrollTrigger.refresh();
+        });
 
         gsap.set(".service-card", { y: 40, opacity: 0, willChange: "transform" });
 
@@ -140,7 +171,9 @@ export function useScrollAnimations(containerRef: RefObject<HTMLElement | null>)
         window.addEventListener("resize", onResize);
 
         return () => {
+          cancelled = true;
           window.removeEventListener("resize", onResize);
+          headingTweens.forEach((tween) => tween.kill());
           splits.forEach((split) => split.revert());
         };
       });
