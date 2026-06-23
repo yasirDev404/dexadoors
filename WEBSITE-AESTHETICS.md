@@ -13,7 +13,7 @@ The site prioritizes:
 - **Clarity over clutter** — one message per section, generous whitespace, no competing visual noise
 - **Typography as hierarchy** — serif headlines for authority, sans-serif body for readability
 - **Quiet luxury** — borders and glows are low-contrast; hover states are felt, not shouted
-- **Purposeful motion** — animation appears only where it adds meaning (intro boot, nav edge glow)
+- **Purposeful motion** — animation appears only where it adds meaning (intro boot, nav edge glow, scroll reveals)
 
 There is **no hero background illustration, light rays, or 3D model** in the current build. The hero is plain `#080808` with typography and CTAs only.
 
@@ -26,7 +26,7 @@ There is **no hero background illustration, light rays, or 3D model** in the cur
 | **Mood** | Dark, focused, professional, slightly cinematic |
 | **Energy** | Calm and assured — not playful or startup-neon |
 | **Trust** | Serif headlines, real project cards, stats, structured contact flow |
-| **Tech** | Blue accent, glass nav, animated nav border, boot intro with logo fly-in |
+| **Tech** | Blue accent, glass nav, animated nav border, boot intro with logo fly-in, Lenis smooth scroll + GSAP scroll reveals |
 
 ---
 
@@ -88,7 +88,7 @@ Loaded in `src/routes/__root.tsx` via Google Fonts stylesheet.
 | Element | Font | Size | Weight | Line height | Color |
 |---------|------|------|--------|-------------|-------|
 | Hero H1 | Playfair Display | 48px → 72px (md+) | Bold | 1.1 | `#F2F2F2` |
-| Section H2 | Playfair Display | 36px → 52px (md+) | Bold | 1.15 | `#F2F2F2` |
+| Section H2 | Playfair Display | 36px → 52px (md+) | Bold | 1.15 | `#F2F2F2` — class `.section-heading`; line-split for scroll reveal |
 | Hero subcopy | DM Sans | 18px | Normal | 1.7 | `#6B6B6B` |
 | Section subcopy | DM Sans | 16px | Normal | 1.7 | `#6B6B6B` |
 | Card title | DM Sans | 16–20px | Medium (500) | — | `#F2F2F2` |
@@ -105,6 +105,7 @@ Loaded in `src/routes/__root.tsx` via Google Fonts stylesheet.
 
 - **Headlines are always left-aligned** in content sections except contact/book headings (centered).
 - **Serif is reserved for H1, H2, stats numbers, and one book-a-call date line** — never for UI chrome or form labels.
+- **Section H2s use `.section-heading`** — split into lines (`.split-line`) for scroll animation; parent clips with `overflow: hidden`.
 - **Muted gray (`#6B6B6B`) carries all secondary reading** — descriptions, trust lines, metadata.
 - **No gradient text** on the live homepage (gradient headlines exist only in unused Spline demo components).
 
@@ -244,11 +245,22 @@ Email contact card uses nested icon tile: `h-10 w-10` rounded square on `#080808
 
 ## Motion & animation
 
-### Global
+Motion is split across three systems: **Framer Motion** (intro only), **Lenis** (global smooth scroll), and **GSAP + ScrollTrigger** (homepage scroll reveals). All scroll animations respect `prefers-reduced-motion: reduce` — Lenis and GSAP effects are skipped; content renders immediately.
 
-- `scroll-behavior: smooth` on `html` for anchor navigation (`#services`, `#work`, `#contact`)
+Detailed implementation log: `SCROLL-ANIMATIONS-PHASE-1.md`.
+
+### Global UI
+
 - `antialiased` and legibility rendering on body text
 - Hover transitions are **short** (150–300ms) and limited to color, border, or opacity
+
+### Global scroll
+
+- **Lenis** — smooth wheel scroll site-wide (`lerp: 0.08`, `smoothWheel: true`), initialized in `SmoothScrollProvider` via `src/routes/__root.tsx`
+- **GSAP ticker sync** — `lenis.on('scroll', ScrollTrigger.update)` + `gsap.ticker.add` drives Lenis RAF
+- **Anchor links** — `#services`, `#work`, `#contact` scroll via Lenis with **52px offset** (fixed nav height)
+- **CSS** — `scroll-behavior: smooth` on `html` as fallback; `html.lenis { scroll-behavior: auto !important; }` when Lenis is active
+- **Reduced motion** — Lenis disabled; native browser scroll
 
 ### Nav border glow (`.nav-border-glow`)
 
@@ -259,7 +271,76 @@ A **1px animated light** along the bottom of the navigation bar:
 - **Visual:** Comet-shaped white gradient blob; edge vignette fades line into `#080808` at sides
 - **Implementation:** `src/styles.css` — `@keyframes nav-glow-pulse`
 
-This is the only continuous ambient animation on the page after intro.
+This is the only **continuous ambient CSS animation** on the page after intro (scroll motion is user-driven, not looping).
+
+### Homepage scroll reveals (GSAP)
+
+Implemented in `src/hooks/useScrollAnimations.ts`, called from `src/routes/index.tsx`. Animations initialize after the intro completes (`useIntroComplete`) and Playfair Display loads (`document.fonts.ready`). All motion uses **transform and opacity only** (`will-change: transform`).
+
+#### Hero H1 (`.hero-title`)
+
+- **Parallax scrub** — `y: 0 → -(heroHeight × 0.3)` as user scrolls through hero
+- **Trigger:** hero section, `start: "top top"`, `end: "bottom top"`, `scrub: true`, `ease: "none"`
+- Text stays fully visible; no line split, no fade
+
+#### Section H2s (`.section-heading`)
+
+Five section titles — services, work, difference, contact, book a call. Two-part animation per heading:
+
+**1. One-time line reveal** (split-type, `types: "lines"`, class `.split-line`)
+
+| Property | Value |
+|----------|-------|
+| Offset | `y: 24 → 0` |
+| Opacity | `0 → 1` |
+| Duration | `0.6s` |
+| Stagger | `0.05s` per line |
+| Ease | `power2.out` |
+| Trigger | `top 88%`, **`once: true`** |
+
+Lines reveal on first enter, then **stay visible** — headings never fade out while reading a section.
+
+**2. Section parallax** (hero-style, gentler)
+
+| Property | Value |
+|----------|-------|
+| Target | whole `.section-heading` element |
+| Motion | `y: 0 → -(sectionHeight × 0.12)` |
+| Trigger | parent `<section>`, `top top` → `bottom top` |
+| Scrub | `true`, `ease: "none"` |
+
+Subtle up/down drift while scrolling through a section — opacity unchanged.
+
+**CSS** (`src/styles.css`):
+
+```css
+.section-heading { overflow: hidden; }
+.split-line { display: block; overflow: hidden; will-change: transform; }
+```
+
+#### Service cards (`.service-card`)
+
+- Enter at `y: 40`, `opacity: 0`
+- **ScrollTrigger.batch** — stagger `0.1`, duration `0.7s`, `power2.out`, trigger `top 85%`
+- Play on enter only; cards stay visible after reveal
+
+#### Stats (`.stat-number`, `#stats`)
+
+- Count from `0` to target (`data-value`: `"10+"`, `"100%"`, etc.) over **1.5s**
+- GSAP `snap: 1` for whole numbers; suffix preserved
+- **Once** per page load when stats section enters at `top 85%`
+
+#### Project cards (`.project-card`)
+
+- Enter at `y: 50`, `scale: 0.96`, `opacity: 0`
+- **ScrollTrigger.batch** — stagger `0.15`, duration `0.8s`, `power2.out`, trigger `top 85%`
+
+### Motion principles (scroll)
+
+- **Subtle over showy** — small offsets (24px lines, 0.12× parallax on sections vs 0.3× on hero)
+- **Readable first** — section headings do not hide after reveal; no reverse-to-opacity-zero
+- **Transform-only** — no layout-triggering properties animated
+- **Intro is separate** — Framer Motion intro logic is untouched; scroll animations defer until intro finishes
 
 ### Homepage intro (first visit)
 
@@ -281,41 +362,42 @@ Intro motion uses **Framer Motion** with custom easing curves — snappy pop (`[
 
 - Full viewport height, left-aligned copy block
 - No background effects — pure `#080808`
-- Largest serif headline on the site
+- Largest serif headline on the site (`.hero-title`) with scroll-linked parallax
 - Dual CTA row: blue primary + ghost secondary
 - Small trust line in muted gray
 
 ### Services
 
-- Problem-statement H2 + muted explainer
-- 7-card grid with service icons
+- Problem-statement H2 (`.section-heading`) + muted explainer — line reveal on scroll
+- 7-card grid (`.service-card`) with staggered scroll enter
 - Uniform card height via flex column, icon → title → description
 
 ### Stats
 
-- Open section (no card wrappers)
-- Large serif numerals as visual anchors
+- Open section (`#stats`), no card wrappers
+- Large serif numerals (`.stat-number`) — count up from 0 on first enter
 - Uppercase micro-labels beneath
 
 ### Work
 
-- Project cards with industry/tag line at top
-- External link as ghost pill at card bottom
+- Section H2 with line reveal
+- Project cards (`.project-card`) with staggered scale + fade enter
+- Industry/tag line at top; external link as ghost pill at card bottom
 - `group` class present but hover is border-only (no image reveals)
 
 ### Difference (values)
 
-- Three-column value props — same card language as services
+- Three-column value props — same card language as services (cards not scroll-animated; H2 uses line reveal)
 
 ### Contact
 
-- Centered section header
+- Centered section header (`.section-heading`) with line reveal
 - Split: left narrative + email card, right mailto form
 - Form submits via `mailto:` — no backend UI chrome
 
 ### Book a call
 
-- Centered header
+- Centered header (`.section-heading`) with line reveal
 - Single large card with checklist (icon tiles) and Calendly CTA
 - Availability shown in serif for the day range
 
@@ -346,7 +428,7 @@ To avoid aesthetic drift, note what the **current** site does **not** use:
 - No gradients on headlines or backgrounds (except nav CTA glass and nav glow)
 - No drop shadows on cards
 - No bright secondary accent colors (orange, green, etc.)
-- No animated scroll reveals on section content
+- No scroll animation on difference-section value cards or body paragraphs (headings, service cards, stats, and project cards only)
 
 ---
 
@@ -361,7 +443,7 @@ When adding new UI, match these patterns:
 5. **Radius** — `rounded-xl` cards, `rounded-full` buttons, `rounded-lg` inputs
 6. **Spacing** — `py-[140px]` sections, `px-6` gutters, `max-w-5xl` content
 7. **Icons** — Lucide, 20px in cards, muted gray
-8. **Motion** — subtle, fast hovers; no gratuitous parallax or scroll jank
+8. **Motion** — subtle scroll reveals (GSAP); Lenis smooth scroll; fast hover transitions (150–300ms); section headings stay visible after reveal; parallax is gentle (0.12× sections, 0.3× hero)
 9. **Glass** — reserve for nav-level chrome, not every card
 
 ---
@@ -373,9 +455,12 @@ When adding new UI, match these patterns:
 | Design tokens & custom CSS | `src/styles.css` |
 | Homepage layout & inline styles | `src/routes/index.tsx` |
 | Font loading | `src/routes/__root.tsx` |
+| Lenis smooth scroll provider | `src/components/smooth-scroll/smooth-scroll-provider.tsx` |
+| Homepage scroll animations | `src/hooks/useScrollAnimations.ts` |
+| Scroll animation changelog | `SCROLL-ANIMATIONS-PHASE-1.md` |
 | Intro overlay aesthetics | `src/components/intro/intro-overlay.tsx` |
 | shadcn config | `components.json` (style: `new-york`) |
 
 ---
 
-*Last updated to reflect the site state after removal of hero background effects and 3D model.*
+*Last updated to reflect Lenis smooth scroll, GSAP scroll reveals, and Phase 1.1 section heading behavior (reveal once + parallax, no fade-out).*
