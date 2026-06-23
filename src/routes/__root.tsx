@@ -11,6 +11,7 @@ import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { IntroOverlay } from "../components/intro/intro-overlay";
+import { SmoothScrollProvider } from "../components/smooth-scroll/smooth-scroll-provider";
 import {
   INTRO_BOOT_CRITICAL_CSS,
   INTRO_BOOT_SCRIPT,
@@ -123,7 +124,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <SmoothScrollProvider>
+        <Outlet />
+      </SmoothScrollProvider>
     </QueryClientProvider>
   );
 }

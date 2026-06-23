@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useRef } from "react";
 import {
   ArrowRight,
   Layers,
@@ -20,8 +21,7 @@ import {
   CalendarDays,
 } from "lucide-react";
 
-import { HeroRaysBackground } from "@/components/backgrounds/hero-rays-background";
-import { SplineScene } from "@/components/ui/splite";
+import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -94,6 +94,9 @@ const differences = [
 ];
 
 function Home() {
+  const mainRef = useRef<HTMLElement>(null);
+  useScrollAnimations(mainRef);
+
   return (
     <div className="relative z-[1] min-h-screen text-[#F2F2F2] antialiased">
       {/* NAV */}
@@ -148,20 +151,11 @@ function Home() {
         <div className="nav-border-glow pointer-events-none absolute right-4 bottom-0 left-4 mx-auto max-w-6xl md:right-6 md:left-6" aria-hidden="true" />
       </nav>
 
-      <main id="top">
-        {/* HERO — SideRays live here only; they scroll away with this section */}
-        <section className="relative flex min-h-screen flex-col justify-center overflow-x-clip pt-[52px]">
-          <HeroRaysBackground />
-          <div className="hero-spline">
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="hero-spline__canvas"
-              waitForIntro
-            />
-          </div>
-          <div className="relative z-[1] order-1 mx-auto w-full max-w-6xl px-4 py-[140px] sm:px-6 lg:max-w-7xl lg:pl-0 lg:pr-6">
-            <div className="w-full max-w-xl text-left lg:max-w-[min(520px,38vw)]">
-              <h1 className="font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] md:text-[72px]">
+      <main id="top" ref={mainRef}>
+        <section className="relative flex min-h-screen items-center pt-[52px]">
+          <div className="relative z-[1] mx-auto w-full max-w-5xl px-6 py-[140px]">
+            <div className="w-full max-w-xl text-left">
+              <h1 className="hero-title font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] will-change-transform md:text-[72px]">
                 Your business deserves more than just a website.
               </h1>
               <p className="mt-8 max-w-[520px] text-[18px] leading-[1.7] text-[#6B6B6B]">
@@ -191,7 +185,7 @@ function Home() {
         <section id="services">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-2xl">
-              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+              <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 Tired of managing agencies that don't talk to each other?
               </h2>
               <p className="mt-6 max-w-[480px] text-[16px] leading-[1.7] text-[#6B6B6B]">
@@ -203,7 +197,7 @@ function Home() {
               {services.map(({ icon: Icon, name, desc }) => (
                 <div
                   key={name}
-                  className="flex flex-col gap-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8 transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
+                  className="service-card flex flex-col gap-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8 transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
                   <Icon className="h-5 w-5 text-[#6B6B6B]" />
                   <h3 className="text-[16px] font-medium text-[#F2F2F2]">{name}</h3>
@@ -215,12 +209,17 @@ function Home() {
         </section>
 
         {/* STATS */}
-        <section>
+        <section id="stats">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="grid grid-cols-2 gap-y-16 md:grid-cols-4">
               {stats.map((s) => (
                 <div key={s.label}>
-                  <div className="font-serif text-[48px] font-bold text-white md:text-[64px]">{s.num}</div>
+                  <div
+                    className="stat-number font-serif text-[48px] font-bold text-white md:text-[64px]"
+                    data-value={s.num}
+                  >
+                    {s.num}
+                  </div>
                   <div className="mt-4 text-[13px] uppercase tracking-[0.05em] text-[#6B6B6B]">{s.label}</div>
                 </div>
               ))}
@@ -232,7 +231,7 @@ function Home() {
         <section id="work">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-2xl">
-              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+              <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 Real projects. Real businesses.
               </h2>
             </div>
@@ -240,7 +239,7 @@ function Home() {
               {projects.map((p) => (
                 <div
                   key={p.name}
-                  className="group flex flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
+                  className="project-card group flex flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
                   <div className="px-8 pt-8">
                     <span className="text-[12px] uppercase tracking-[0.08em] text-[#6B6B6B]">
@@ -269,7 +268,7 @@ function Home() {
         <section>
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="max-w-3xl">
-              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+              <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 You're not hiring a vendor. You're gaining a partner.
               </h2>
             </div>
@@ -292,7 +291,7 @@ function Home() {
         <section id="contact">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+              <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 Get In Touch
               </h2>
               <p className="mx-auto mt-6 max-w-[480px] text-[16px] leading-[1.7] text-[#6B6B6B]">
@@ -377,7 +376,7 @@ function Home() {
         <section id="book">
           <div className="mx-auto max-w-5xl px-6 py-[140px]">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
+              <h2 className="section-heading font-serif text-[36px] font-bold leading-[1.15] text-[#F2F2F2] md:text-[52px]">
                 Or Book A Call With Us
               </h2>
               <p className="mx-auto mt-6 max-w-[480px] text-[16px] leading-[1.7] text-[#6B6B6B]">

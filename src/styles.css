@@ -85,6 +85,19 @@
     scroll-behavior: smooth;
   }
 
+  html.lenis {
+    scroll-behavior: auto !important;
+  }
+
+  .section-heading {
+    overflow: hidden;
+  }
+
+  .split-line {
+    display: block;
+    will-change: transform;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -114,62 +127,6 @@
     z-index: 199;
     background: #050505;
     pointer-events: none;
-  }
-
-  /* Hero Spline — mobile: in flow; desktop: viewport-wide stage anchored to right edge */
-  .hero-spline {
-    position: relative;
-    z-index: 2;
-    order: 2;
-    width: 100%;
-    min-height: 420px;
-    margin-top: 2.5rem;
-    overflow: visible;
-  }
-
-  .hero-spline__canvas {
-    width: 100%;
-    height: min(720px, 78vh);
-    min-height: 420px;
-    overflow: visible;
-    transform: scale(0.86);
-    transform-origin: center center;
-  }
-
-  .hero-spline__canvas > div,
-  .hero-spline__canvas canvas {
-    width: 100% !important;
-    height: 100% !important;
-    overflow: visible;
-  }
-
-  @media (min-width: 1024px) {
-    .hero-spline {
-      position: absolute;
-      top: calc(52px + 6vh);
-      bottom: 6vh;
-      left: clamp(320px, 38vw, 540px);
-      right: 0;
-      order: unset;
-      width: auto;
-      min-height: 0;
-      height: auto;
-      margin-top: 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: max(0px, env(safe-area-inset-right, 0px));
-      transform: translate(2.5rem, -2rem);
-    }
-
-    .hero-spline__canvas {
-      width: 100%;
-      height: 100%;
-      max-height: min(86vh, 900px);
-      min-height: 0;
-      transform: scale(0.8);
-      transform-origin: 72% center;
-    }
   }
 
   .nav-cta {
