@@ -8,11 +8,6 @@ import { useIntroComplete } from "@/hooks/use-intro-complete";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function parseStatValue(raw: string) {
-  const m = raw.match(/^(\d+(?:\.\d+)?)(.*)$/);
-  return { target: m ? Number(m[1]) : 0, suffix: m?.[2] ?? "" };
-}
-
 export function useScrollAnimations(containerRef: RefObject<HTMLElement | null>) {
   const introComplete = useIntroComplete();
 
@@ -98,29 +93,6 @@ export function useScrollAnimations(containerRef: RefObject<HTMLElement | null>)
               ease: "power2.out",
               overwrite: true,
             }),
-        });
-
-        ScrollTrigger.create({
-          trigger: "#stats",
-          start: "top 85%",
-          once: true,
-          onEnter: () => {
-            scope.querySelectorAll<HTMLElement>(".stat-number").forEach((el) => {
-              const { target, suffix } = parseStatValue(
-                el.dataset.value ?? el.textContent ?? "0",
-              );
-              const counter = { val: 0 };
-              gsap.to(counter, {
-                val: target,
-                duration: 1.5,
-                snap: { val: 1 },
-                ease: "power2.out",
-                onUpdate: () => {
-                  el.textContent = `${Math.round(counter.val)}${suffix}`;
-                },
-              });
-            });
-          },
         });
 
         gsap.set(".project-card", {

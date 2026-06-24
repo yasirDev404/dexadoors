@@ -23,6 +23,12 @@ import {
 
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 import { HeroDeviceMockup } from "@/components/hero/hero-device-mockup";
+import { MagicCard } from "@/components/ui/magic-card";
+
+const clientNames = ["Deepsurf", "LichtLettersXXL", "Hoppaverhuur", "Zanny's Food"];
+
+const projectCardNoise =
+  'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")';
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -52,13 +58,6 @@ const services = [
   { icon: Video, name: "Video & Content", desc: "Content that stops the scroll and tells your story." },
   { icon: Bot, name: "AI Integration & Chatbots", desc: "We embed intelligence into your systems. Chatbots, automation, and AI tools that actually work for your business." },
   { icon: LifeBuoy, name: "Ongoing Support", desc: "We don't disappear after launch. We stay, we improve, we grow with you." },
-];
-
-const stats = [
-  { num: "10+", label: "Production systems delivered" },
-  { num: "3", label: "Countries served" },
-  { num: "4", label: "Industries built for" },
-  { num: "100%", label: "Project completion rate" },
 ];
 
 const projects = [
@@ -153,7 +152,8 @@ function Home() {
       </nav>
 
       <main id="top" ref={mainRef}>
-        <section className="relative flex min-h-screen items-center overflow-hidden pt-[52px]">
+        <section className="relative flex min-h-screen items-center overflow-x-clip pt-[52px]">
+          <div className="hero-glow-orb pointer-events-none" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[55%] lg:block">
             <HeroDeviceMockup />
           </div>
@@ -184,6 +184,25 @@ function Home() {
               </p>
             </div>
           </div>
+          <div className="hero-beam pointer-events-none" aria-hidden="true" />
+        </section>
+
+        <section aria-label="Trusted clients" className="border-y border-[rgba(255,255,255,0.06)] py-12">
+          <div className="mx-auto max-w-5xl px-6 text-center">
+            <p className="text-[13px] tracking-[0.04em] text-[#6B6B6B]">
+              Trusted by businesses across the UK, Netherlands & beyond.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-12">
+              {clientNames.map((name) => (
+                <span
+                  key={name}
+                  className="text-[13px] font-medium uppercase tracking-[0.08em] text-[rgba(242,242,242,0.25)]"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section id="services" className="section-divider">
@@ -199,36 +218,15 @@ function Home() {
 
             <div className="section-cards relative z-[1] mt-20 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-[88px] md:translate-y-3 lg:grid-cols-3">
               {services.map(({ icon: Icon, name, desc }) => (
-                <div
+                <MagicCard
                   key={name}
-                  className="service-card flex flex-col gap-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] p-8"
+                  className="service-card"
+                  gradientColor="rgba(37, 99, 235, 0.08)"
                 >
                   <Icon className="h-5 w-5 text-[#6B6B6B]" />
                   <h3 className="text-[16px] font-medium text-[#F2F2F2]">{name}</h3>
                   <p className="text-[14px] leading-relaxed text-[#6B6B6B]">{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* STATS */}
-        <section id="stats" className="section-divider">
-          <div className="mx-auto max-w-5xl px-6 py-[140px]">
-            <p className="mb-12 text-center text-[11px] uppercase tracking-[0.12em] text-[#6B6B6B] md:mb-16">
-              By the numbers
-            </p>
-            <div className="grid grid-cols-2 gap-y-12 md:grid-cols-4 md:gap-y-0">
-              {stats.map((s) => (
-                <div key={s.label} className="stat-chip border-l border-[rgba(37,99,235,0.3)] pl-6 md:pl-8">
-                  <div
-                    className="stat-number font-serif text-[48px] font-bold text-white md:text-[64px]"
-                    data-value={s.num}
-                  >
-                    {s.num}
-                  </div>
-                  <div className="mt-4 text-[13px] uppercase tracking-[0.05em] text-[#6B6B6B]">{s.label}</div>
-                </div>
+                </MagicCard>
               ))}
             </div>
           </div>
@@ -246,10 +244,15 @@ function Home() {
               {projects.map((p) => (
                 <div
                   key={p.name}
-                  className="project-card group flex flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
+                  className="project-card group relative flex flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
+                  <div
+                    className="pointer-events-none absolute inset-0 z-0 rounded-xl opacity-[0.025]"
+                    style={{ backgroundImage: projectCardNoise }}
+                    aria-hidden
+                  />
                   <div className="px-8 pt-8">
-                    <span className="inline-flex rounded-full border border-[rgba(255,255,255,0.08)] bg-[#080808] px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-[#6B6B6B]">
+                    <span className="inline-flex rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-[10px] py-[2px] text-[11px] uppercase tracking-[0.07em] text-[#6B6B6B]">
                       {p.tag}
                     </span>
                   </div>
