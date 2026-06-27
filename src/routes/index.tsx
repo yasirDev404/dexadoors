@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
-import { HeroDeviceMockup } from "@/components/hero/hero-device-mockup";
 import { MagicCard } from "@/components/ui/magic-card";
 
 const clientNames = ["Deepsurf", "LichtLettersXXL", "Hoppaverhuur", "Zanny's Food"];
@@ -153,13 +152,12 @@ function Home() {
 
       <main id="top" ref={mainRef}>
         <section className="relative flex min-h-screen items-center overflow-x-clip pt-[52px]">
-          <div className="hero-glow-orb pointer-events-none" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[55%] lg:block">
-            <HeroDeviceMockup />
-          </div>
-          <div className="relative z-[1] mx-auto grid w-full max-w-5xl px-6 py-[120px] lg:grid-cols-2 lg:py-[140px]">
+          <div
+            className="relative z-[1] w-full max-w-5xl py-[120px] pl-8 pr-6 lg:py-[140px]"
+            style={{ marginLeft: "clamp(8rem, 30vw, 24rem)" }}
+          >
             <div className="w-full max-w-xl text-left">
-              <h1 className="hero-title font-serif text-[48px] font-bold leading-[1.1] text-[#F2F2F2] will-change-transform md:text-[72px]">
+              <h1 className="hero-title font-serif text-[60px] font-bold leading-[1.1] text-[#F2F2F2] will-change-transform md:text-[80px]">
                 Your business deserves more than just a website.
               </h1>
               <p className="mt-8 max-w-[520px] text-[18px] leading-[1.7] text-[#6B6B6B]">
@@ -184,7 +182,6 @@ function Home() {
               </p>
             </div>
           </div>
-          <div className="hero-beam pointer-events-none" aria-hidden="true" />
         </section>
 
         <section aria-label="Trusted clients" className="border-y border-[rgba(255,255,255,0.06)] py-12">
