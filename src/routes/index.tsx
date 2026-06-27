@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef } from "react";
 import {
   ArrowRight,
@@ -23,6 +23,7 @@ import {
 
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 import { MagicCard } from "@/components/ui/magic-card";
+import { getHomepageProjects } from "@/lib/work-projects";
 
 const clientNames = ["Deepsurf", "LichtLettersXXL", "Hoppaverhuur", "Zanny's Food"];
 
@@ -59,32 +60,7 @@ const services = [
   { icon: LifeBuoy, name: "Ongoing Support", desc: "We don't disappear after launch. We stay, we improve, we grow with you." },
 ];
 
-const projects = [
-  {
-    name: "Deepsurf",
-    desc: "AI-driven crypto analytics platform featuring Mavi, an intelligent chatbot that analyses live market data and guides users in real time.",
-    tag: "Fintech · UK",
-    href: "https://www.deepsurf.io",
-  },
-  {
-    name: "LichtLettersXXL",
-    desc: "Multi-role CRM and booking platform with an embedded AI chatbot serving admin, vendor and customer roles.",
-    tag: "SaaS · Netherlands",
-    href: "https://xxllichtletters.nl",
-  },
-  {
-    name: "Hoppaverhuur",
-    desc: "Full rental marketplace with inventory management, bookings and admin dashboard.",
-    tag: "Marketplace · Netherlands",
-    href: "https://www.hoppaverhuur.nl",
-  },
-  {
-    name: "Zanny's Food",
-    desc: "End-to-end food delivery ecosystem with iOS and Android apps for customers, vendors, drivers and admins.",
-    tag: "Mobile App · UK",
-    href: "https://www.zannysfood.co.uk",
-  },
-];
+const projects = getHomepageProjects();
 
 const differences = [
   { icon: Compass, title: "We think like owners", desc: "We ask what your business needs to grow, not just what you asked us to build." },
@@ -94,6 +70,7 @@ const differences = [
 
 function Home() {
   const mainRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
   useScrollAnimations(mainRef);
 
   return (
@@ -241,7 +218,16 @@ function Home() {
               {projects.map((p) => (
                 <div
                   key={p.name}
-                  className="project-card group relative flex flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
+                  role="link"
+                  tabIndex={0}
+                  onClick={() => navigate({ to: "/work/$slug", params: { slug: p.slug } })}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      navigate({ to: "/work/$slug", params: { slug: p.slug } });
+                    }
+                  }}
+                  className="project-card group relative flex cursor-pointer flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111111] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.14)]"
                 >
                   <div
                     className="pointer-events-none absolute inset-0 z-0 rounded-xl opacity-[0.025]"
@@ -255,11 +241,12 @@ function Home() {
                   </div>
                   <div className="flex flex-1 flex-col px-8 pb-8 pt-4">
                     <h3 className="text-[20px] font-medium text-[#F2F2F2]">{p.name}</h3>
-                    <p className="mt-3 flex-1 text-[14px] leading-[1.7] text-[#6B6B6B]">{p.desc}</p>
+                    <p className="mt-3 flex-1 text-[14px] leading-[1.7] text-[#6B6B6B]">{p.cardDesc}</p>
                     <a
-                      href={p.href}
+                      href={p.liveUrl}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-[rgba(255,255,255,0.08)] px-5 py-2 text-[13px] text-[#F2F2F2] transition-[border-color] duration-200 hover:border-[rgba(255,255,255,0.2)]"
                     >
                       Visit Live Site <ExternalLink className="h-3.5 w-3.5" />
